@@ -67,15 +67,15 @@
                     </button>
                     <!-- Floating Dropdown Box -->
                     <div class="dropdown-menu absolute left-1/2 -translate-x-1/2 mt-3 w-56 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl p-2 z-50">
-                        <button onclick="filterCategory('breakfast')" class="w-full text-left px-4 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition-colors flex items-center gap-2">
+                        <a href="breakfast" class="w-full text-left px-4 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition-colors flex items-center gap-2">
                             🥣 Breakfast
-                        </button>
-                        <button onclick="filterCategory('lunch-dinner')" class="w-full text-left px-4 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition-colors flex items-center gap-2">
+                        </a>
+                        <a href="lunch-and-dinner" class="w-full text-left px-4 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition-colors flex items-center gap-2">
                             🍲 Lunches & Dinners
-                        </button>
-                        <button onclick="filterCategory('sweets-snacks')" class="w-full text-left px-4 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition-colors flex items-center gap-2">
+                        </a>
+                        <a href="snacks-and-sweets" class="w-full text-left px-4 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition-colors flex items-center gap-2">
                             🍰 Sweets & Snacks
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -106,21 +106,21 @@
                     <button id="mobile-menu-close" class="text-slate-500">✕</button>
                 </div>
                 <div class="flex flex-col space-y-4">
-                    <a href="index.html" class="font-bold text-emerald-600 dark:text-emerald-400">Home</a>
+                    <a href="index.html" class="font-bold text-slate-700 dark:text-slate-300">Home</a>
                     <a href="#" onclick="alertModal('About FiberFeasts', 'We are a platform dedicated to making healthy, high-fiber eating simple, approachable, and delicious for cooks of all ages!')" class="font-bold text-slate-700 dark:text-slate-300">About</a>
                     
                     <!-- Mobile Categories Stack -->
                     <div class="border-t border-slate-100 dark:border-slate-800 pt-4 space-y-2">
                         <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">Recipe Collections</span>
-                        <button onclick="filterCategory('breakfast')" class="w-full text-left font-semibold text-slate-700 dark:text-slate-300 py-1 flex items-center gap-2">
+                        <a href="breakfast" class="w-full text-left font-semibold text-slate-700 dark:text-slate-300 py-1 flex items-center gap-2">
                             🥣 Breakfast
-                        </button>
-                        <button onclick="filterCategory('lunch-dinner')" class="w-full text-left font-semibold text-slate-700 dark:text-slate-300 py-1 flex items-center gap-2">
+                        </a>
+                        <a href="lunch-and-dinner" class="w-full text-left font-semibold text-slate-700 dark:text-slate-300 py-1 flex items-center gap-2">
                             🍲 Lunches & Dinners
-                        </button>
-                        <button onclick="filterCategory('sweets-snacks')" class="w-full text-left font-semibold text-slate-700 dark:text-slate-300 py-1 flex items-center gap-2">
+                        </a>
+                        <a href="snacks-and-sweets" class="w-full text-left font-semibold text-slate-700 dark:text-slate-300 py-1 flex items-center gap-2">
                             🍰 Sweets & Snacks
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -162,15 +162,6 @@
                     <!-- Javascript populates items here in real-time -->
                 </div>
             </form>
-
-            <!-- Active Filter Badge Row -->
-            <div id="filter-pill-container" class="mt-6 flex flex-wrap justify-center gap-2 text-xs font-bold transition-all hidden">
-                <span class="text-slate-500 dark:text-slate-400 flex items-center">Active Filter:</span>
-                <span id="active-filter-badge" class="bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 px-3 py-1 rounded-full flex items-center gap-2">
-                    <span id="filter-badge-text"></span>
-                    <button onclick="clearFilter()" class="hover:text-red-500">✕</button>
-                </span>
-            </div>
         </div>
     </header>
 
@@ -180,7 +171,7 @@
             
             <!-- Category Shortcuts Panel -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-                <button onclick="filterCategory('breakfast')" class="p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm hover:shadow-md transition-all text-left flex items-center justify-between group">
+                <a href="breakfast" class="p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm hover:shadow-md transition-all text-left flex items-center justify-between group">
                     <div class="flex items-center gap-4">
                         <span class="text-3xl bg-emerald-100 dark:bg-slate-700 p-3 rounded-2xl group-hover:rotate-6 transition-transform">🥣</span>
                         <div>
@@ -189,8 +180,8 @@
                         </div>
                     </div>
                     <span class="text-emerald-500 font-bold">&rarr;</span>
-                </button>
-                <button onclick="filterCategory('lunch-dinner')" class="p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm hover:shadow-md transition-all text-left flex items-center justify-between group">
+                </a>
+                <a href="lunch-and-dinner" class="p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm hover:shadow-md transition-all text-left flex items-center justify-between group">
                     <div class="flex items-center gap-4">
                         <span class="text-3xl bg-amber-100 dark:bg-slate-700 p-3 rounded-2xl group-hover:rotate-6 transition-transform">🍲</span>
                         <div>
@@ -199,8 +190,8 @@
                         </div>
                     </div>
                     <span class="text-emerald-500 font-bold">&rarr;</span>
-                </button>
-                <button onclick="filterCategory('sweets-snacks')" class="p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm hover:shadow-md transition-all text-left flex items-center justify-between group">
+                </a>
+                <a href="snacks-and-sweets" class="p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm hover:shadow-md transition-all text-left flex items-center justify-between group">
                     <div class="flex items-center gap-4">
                         <span class="text-3xl bg-pink-100 dark:bg-slate-700 p-3 rounded-2xl group-hover:rotate-6 transition-transform">🍰</span>
                         <div>
@@ -209,7 +200,7 @@
                         </div>
                     </div>
                     <span class="text-emerald-500 font-bold">&rarr;</span>
-                </button>
+                </a>
             </div>
 
             <!-- Recipe Grid Title -->
@@ -220,14 +211,7 @@
             
             <!-- Real-time Recipe Container -->
             <div id="recipe-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Recipes are compiled and injected directly by JavaScript to enable instant category switching -->
-            </div>
-
-            <!-- Empty Results Template -->
-            <div id="no-results" class="hidden text-center py-16 bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                <span class="text-5xl block mb-4">🔍</span>
-                <h3 class="text-2xl font-extrabold text-slate-800 dark:text-slate-200">No high-fiber matches found</h3>
-                <p class="text-slate-500 dark:text-slate-400 mt-2 max-w-sm mx-auto">Try typing broad terms like "seeds", "beans", "salad", or click "Reset" above to see our entire catalog.</p>
+                <!-- Recipes are compiled and injected directly by JavaScript -->
             </div>
 
         </div>
@@ -248,8 +232,9 @@
             <p class="text-white font-extrabold text-xl mb-4">🌾 FiberFeasts</p>
             <p class="text-slate-500 text-sm mb-6 font-medium">&copy; 2026. Eat well, live well.</p>
             <div class="flex justify-center space-x-6 text-sm font-bold">
-                <a href="#" onclick="alertModal('Contact Us', 'Have a high-fiber recipe you would love to share? Drop us a note at hello@fiberfeasts.com!')" class="text-slate-300 hover:text-emerald-400 transition-colors">Contact</a>
-                <a href="#" onclick="alertModal('Privacy Policy', 'We value your privacy. We store absolutely no tracking cookies, analytics scripts, or login credentials on this platform.')" class="text-slate-300 hover:text-emerald-400 transition-colors">Privacy Policy</a>
+                <a href="index.html" class="text-slate-300 hover:text-emerald-400 transition-colors">Home</a>
+                <a href="contact.html" class="text-slate-300 hover:text-emerald-400 transition-colors">Contact</a>
+                <a href="privacy.html" class="text-slate-300 hover:text-emerald-400 transition-colors">Privacy Policy</a>
             </div>
         </div>
     </footer>
@@ -290,7 +275,7 @@
                 categoryDisplay: "Lunches & Dinners",
                 fiberAmount: "15g Fiber",
                 image: "https://images.unsplash.com/photo-1548943487-a2e4f43b4850?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                link: "recipe.html",
+                link: "#",
                 emoji: "🍲🥕",
                 keywords: ["lentil", "lentils", "stew", "soup", "carrot", "savory", "dinner", "lunch"]
             },
@@ -333,34 +318,14 @@
         ];
 
         // System State
-        let activeCategoryFilter = null;
         let activeSearchQuery = "";
 
-        // --- Core Rendering Engine (Handles Grid Collections Independently) ---
+        // --- Core Rendering Engine (Handles Grid Collections) ---
         function renderRecipes() {
             const grid = document.getElementById('recipe-grid');
-            const noResults = document.getElementById('no-results');
-            const countDisplay = document.getElementById('result-count');
             
-            // Filter grid based exclusively on category filter
-            const filtered = recipeDatabase.filter(recipe => {
-                return !activeCategoryFilter || recipe.category === activeCategoryFilter;
-            });
-
-            // Update grid result counter
-            countDisplay.innerText = `Showing ${filtered.length} recipe${filtered.length === 1 ? '' : 's'}`;
-
-            if (filtered.length === 0) {
-                grid.classList.add('hidden');
-                noResults.classList.remove('hidden');
-                return;
-            }
-
-            grid.classList.remove('hidden');
-            noResults.classList.add('hidden');
-
-            // Construct DOM cards dynamically
-            grid.innerHTML = filtered.map(recipe => `
+            // Render all catalog items natively (no parameters)
+            grid.innerHTML = recipeDatabase.map(recipe => `
                 <a href="${recipe.link}" class="recipe-card group flex flex-col bg-white dark:bg-slate-800 rounded-3xl shadow-md hover:shadow-xl hover:-translate-y-2 border border-slate-200 dark:border-slate-700 overflow-hidden">
                     <div class="h-48 w-full overflow-hidden relative border-b border-slate-200 dark:border-slate-700">
                         <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
@@ -394,7 +359,7 @@
                 return;
             }
 
-            // Match query string against database titles, descriptions, and keywords
+            // Match query string against database
             const matches = recipeDatabase.filter(recipe => {
                 return recipe.title.toLowerCase().includes(query) ||
                        recipe.description.toLowerCase().includes(query) ||
@@ -423,7 +388,6 @@
             dropdown.classList.remove('hidden');
         }
 
-        // --- Safe HTML String Utility ---
         function escapeHtml(str) {
             return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
@@ -443,36 +407,6 @@
             }
         });
 
-        // --- Category Filters ---
-        function filterCategory(catKey) {
-            activeCategoryFilter = catKey;
-            
-            // Format dynamic badge text
-            const labelMap = {
-                'breakfast': '🥣 Breakfasts',
-                'lunch-dinner': '🍲 Lunches & Dinners',
-                'sweets-snacks': '🍰 Sweets & Snacks'
-            };
-            
-            document.getElementById('filter-pill-container').classList.remove('hidden');
-            document.getElementById('filter-badge-text').innerText = labelMap[catKey];
-            document.getElementById('grid-title').innerText = `${labelMap[catKey]} Collection`;
-            
-            // Scroll smoothly down to the search catalog block
-            document.getElementById('grid-title').scrollIntoView({ behavior: 'smooth' });
-            
-            renderRecipes();
-            closeMobileMenu();
-        }
-
-        // --- Clear Filters ---
-        function clearFilter() {
-            activeCategoryFilter = null;
-            document.getElementById('filter-pill-container').classList.add('hidden');
-            document.getElementById('grid-title').innerText = "Trending High-Fiber Recipes";
-            renderRecipes();
-        }
-
         // --- Modal Box Operations (Avoid raw browser alerts) ---
         function alertModal(title, desc) {
             document.getElementById('modal-title').innerText = title;
@@ -480,7 +414,6 @@
             document.getElementById('custom-modal').classList.remove('hidden');
         }
 
-        // --- Close Modal ---
         function closeModal() {
             document.getElementById('custom-modal').classList.add('hidden');
         }
@@ -493,14 +426,9 @@
         menuBtn.addEventListener('click', () => {
             menuDrawer.classList.remove('hidden');
         });
-        menuCloseBtn.addEventListener('click', closeMobileMenu);
-        menuDrawer.addEventListener('click', (e) => {
-            if (e.target === menuDrawer) closeMobileMenu();
-        });
-
-        function closeMobileMenu() {
+        menuCloseBtn.addEventListener('click', () => {
             menuDrawer.classList.add('hidden');
-        }
+        });
 
         // --- Dark Mode Switch Engine ---
         const themeBtn = document.getElementById('dark-mode-toggle');
@@ -524,7 +452,6 @@
         const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         updateThemeElements(systemPrefersDark);
         
-        // Connect event actions
         themeBtn.addEventListener('click', toggleTheme);
         themeBtnMobile.addEventListener('click', toggleTheme);
 
@@ -533,11 +460,9 @@
             updateThemeElements(!isCurrentlyDark);
         }
 
-        // --- Initial Load Setup ---
         window.addEventListener('DOMContentLoaded', () => {
             renderRecipes();
             
-            // Programmatically bind input event and focus configurations
             const searchInput = document.getElementById('recipe-search');
             if (searchInput) {
                 searchInput.addEventListener('input', handleSearch);
