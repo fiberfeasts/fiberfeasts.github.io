@@ -1,278 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | FiberFeasts</title>
-    <!-- Soup Ladle SVG Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M50 10 L30 38' stroke='%2310b981' stroke-width='5' stroke-linecap='round'/><path d='M16 34 A 12 12 0 0 0 40 34 Z' fill='%2310b981'/></svg>">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <script>
-        // Enable manual class-based dark mode toggling in Tailwind CSS
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Outfit', sans-serif; transition: background-color 0.3s, color 0.3s; }
-        
-        /* Dropdown transition */
-        .dropdown-menu {
-            opacity: 0;
-            transform: translateY(10px);
-            pointer-events: none;
-            transition: all 0.2s ease-out;
-        }
-        .dropdown-container:hover .dropdown-menu,
-        .dropdown-container:focus-within .dropdown-menu {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-900 antialiased flex flex-col min-h-screen selection:bg-emerald-200 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
+---
+layout: default
+title: Contact Us
+---
 
-    <!-- Floating Navigation Bar -->
-    <div class="fixed top-4 left-0 w-full z-50 px-4">
-        <nav class="max-w-4xl mx-auto bg-white/95 backdrop-blur-md border border-slate-200 shadow-md rounded-full px-6 py-4 flex justify-between items-center dark:bg-slate-900/90 dark:border-slate-800">
-            <!-- Logo -->
-            <a href="index.html" class="text-xl font-extrabold tracking-tight flex items-center gap-2 text-slate-900 dark:text-white">
-                <span class="text-2xl">🌾</span> FiberFeasts
+<!-- Main Content Header -->
+<header class="w-full pt-40 pb-12 text-center px-4 bg-white dark:bg-slate-950 border-b border-slate-150 dark:border-slate-900">
+    <div class="max-w-3xl mx-auto">
+        <span class="inline-block py-1.5 px-3.5 rounded-full bg-emerald-100 text-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-300 text-xs font-extrabold uppercase tracking-widest mb-6 border border-emerald-200 dark:border-emerald-900">
+            📬 Say Hello
+        </span>
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight text-slate-900 dark:text-white">
+            Get in Touch
+        </h1>
+        <p class="text-lg md:text-xl text-slate-700 dark:text-slate-300 max-w-xl mx-auto font-medium leading-relaxed">
+            Have a question, feedback, or a cool high-fiber cooking idea? Reach out to us anytime!
+        </p>
+    </div>
+</header>
+
+<!-- Content Sections -->
+<main class="flex-grow w-full max-w-4xl mx-auto px-4 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        
+        <!-- Left Card: Contact Information -->
+        <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm dark:bg-slate-900 dark:border-slate-800 flex flex-col justify-between h-full">
+            <div>
+                <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-4">How to Reach Us</h2>
+                <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
+                    We are run by a small team of healthy eating enthusiasts. For general inquiries, cooking questions, or recipe suggestions, email is our primary connection!
+                </p>
+                
+                <div class="space-y-4 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl bg-slate-100 dark:bg-slate-800 p-2.5 rounded-xl block">✉️</span>
+                        <div>
+                            <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Email us directly</p>
+                            <a href="mailto:hello@yourdomainplaceholder.com" class="text-sm font-extrabold text-emerald-600 dark:text-emerald-400 hover:underline">hello@yourdomainplaceholder.com</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl bg-slate-100 dark:bg-slate-800 p-2.5 rounded-xl block">⏱️</span>
+                        <div>
+                            <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Estimated Response Time</p>
+                            <p class="text-sm font-extrabold text-slate-800 dark:text-white">Within 24 to 48 Hours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 dark:bg-slate-800/50 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                <strong>🛡️ Safety Tip:</strong> Please do not share sensitive personal information (like your phone number or home address) when sending us an email.
+            </div>
+        </div>
+
+        <!-- Right Card: Recipe Submissions Invite -->
+        <div class="bg-gradient-to-br from-emerald-600 to-teal-500 text-white p-8 rounded-3xl shadow-lg relative overflow-hidden group border border-emerald-500 h-full flex flex-col justify-between">
+            <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-white/10 rounded-full blur-xl group-hover:scale-125 transition-transform"></div>
+            <div class="relative z-10">
+                <span class="bg-white/20 border border-white/30 text-white font-bold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider">We Want Your Recipes!</span>
+                <h3 class="text-3xl font-extrabold mt-6 mb-4 leading-tight">Submit Your Wholesome Creations</h3>
+                <p class="text-emerald-50 leading-relaxed font-medium text-sm mb-6">
+                    Are you a kitchen wizard who loves healthy fiber? We are highly interested in featuring community recipes on FiberFeasts! 
+                </p>
+                <p class="text-emerald-50 leading-relaxed font-medium text-sm mb-6">
+                    Send over your recipe detailing your ingredients, step-by-step instructions, and a little description of why you love it. If our test kitchen likes it, we'll build a custom interactive page for your recipe and attribute it to you!
+                </p>
+            </div>
+            <a href="mailto:hello@yourdomainplaceholder.com?subject=My%20Fiber%20Recipe%20Submission" class="relative z-10 bg-white text-emerald-800 hover:bg-emerald-50 text-center font-extrabold py-3.5 px-6 rounded-2xl shadow-md transition-all transform active:scale-95 text-sm">
+                📧 Submit a Recipe via Email
             </a>
-            
-            <!-- Desktop Links -->
-            <div class="hidden md:flex items-center space-x-8 font-semibold text-slate-700 text-sm dark:text-slate-300">
-                <a href="index.html" class="hover:text-emerald-700 transition-colors">Home</a>
-                <a href="#" onclick="alertModal('About FiberFeasts', 'We are a platform dedicated to making healthy, high-fiber eating simple, approachable, and delicious for cooks of all ages!')" class="hover:text-emerald-700 transition-colors">About</a>
-                
-                <!-- Category Dropdown -->
-                <div class="dropdown-container relative">
-                    <button class="flex items-center gap-1 hover:text-emerald-700 transition-colors focus:outline-none">
-                        Recipes 
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <!-- Floating Dropdown Box -->
-                    <div class="dropdown-menu absolute left-1/2 -translate-x-1/2 mt-3 w-56 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl p-2 z-50">
-                        <a href="breakfast" class="w-full text-left px-4 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition-colors flex items-center gap-2">
-                            🥣 Breakfast
-                        </a>
-                        <a href="lunch-and-dinner" class="w-full text-left px-4 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition-colors flex items-center gap-2">
-                            🍲 Lunches & Dinners
-                        </a>
-                        <a href="snacks-and-sweets" class="w-full text-left px-4 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition-colors flex items-center gap-2">
-                            🍰 Sweets & Snacks
-                        </a>
-                    </div>
-                </div>
+        </div>
 
-                <!-- Dark Mode Toggle -->
-                <button id="dark-mode-toggle" class="p-2 bg-slate-100 rounded-full hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition-all">
-                    <span id="dark-mode-icon">🌙</span>
-                </button>
-            </div>
-
-            <!-- Mobile Action Menu -->
-            <div class="flex items-center gap-3 md:hidden">
-                <button id="dark-mode-toggle-mobile" class="p-2 bg-slate-100 rounded-full hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition-all">
-                    <span id="dark-mode-icon-mobile">🌙</span>
-                </button>
-                <button id="mobile-menu-btn" class="text-slate-700 dark:text-slate-200">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
-            </div>
-        </nav>
     </div>
-
-    <!-- Mobile Navigation Drawer -->
-    <div id="mobile-menu" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex justify-end">
-        <div class="w-3/4 max-w-xs bg-white dark:bg-slate-900 h-full p-6 flex flex-col justify-between shadow-2xl transition-all">
-            <div class="space-y-6">
-                <div class="flex justify-between items-center pb-4 border-b border-slate-200 dark:border-slate-800">
-                    <span class="font-extrabold text-lg text-slate-900 dark:text-white">Navigation</span>
-                    <button id="mobile-menu-close" class="text-slate-500">✕</button>
-                </div>
-                <div class="flex flex-col space-y-4">
-                    <a href="index.html" class="font-bold text-slate-700 dark:text-slate-300">Home</a>
-                    <a href="#" onclick="alertModal('About FiberFeasts', 'We are a platform dedicated to making healthy, high-fiber eating simple, approachable, and delicious for cooks of all ages!')" class="font-bold text-slate-700 dark:text-slate-300">About</a>
-                    
-                    <!-- Mobile Categories Stack -->
-                    <div class="border-t border-slate-100 dark:border-slate-800 pt-4 space-y-2">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">Recipe Collections</span>
-                        <a href="breakfast" class="w-full text-left font-semibold text-slate-700 dark:text-slate-300 py-1 flex items-center gap-2">
-                            🥣 Breakfast
-                        </a>
-                        <a href="lunch-and-dinner" class="w-full text-left font-semibold text-slate-700 dark:text-slate-300 py-1 flex items-center gap-2">
-                            🍲 Lunches & Dinners
-                        </a>
-                        <a href="snacks-and-sweets" class="w-full text-left font-semibold text-slate-700 dark:text-slate-300 py-1 flex items-center gap-2">
-                            🍰 Sweets & Snacks
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="text-xs text-slate-400 text-center">🌾 FiberFeasts v1.2</div>
-        </div>
-    </div>
-
-    <!-- Main Content Header -->
-    <header class="w-full pt-40 pb-12 text-center px-4 bg-white dark:bg-slate-950 border-b border-slate-150 dark:border-slate-900">
-        <div class="max-w-3xl mx-auto">
-            <span class="inline-block py-1.5 px-3.5 rounded-full bg-emerald-100 text-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-300 text-xs font-extrabold uppercase tracking-widest mb-6 border border-emerald-200 dark:border-emerald-900">
-                📬 Say Hello
-            </span>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight text-slate-900 dark:text-white">
-                Get in Touch
-            </h1>
-            <p class="text-lg md:text-xl text-slate-700 dark:text-slate-300 max-w-xl mx-auto font-medium leading-relaxed">
-                Have a question, feedback, or a cool high-fiber cooking idea? Reach out to us anytime!
-            </p>
-        </div>
-    </header>
-
-    <!-- Content Sections -->
-    <main class="flex-grow w-full max-w-4xl mx-auto px-4 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            
-            <!-- Left Card: Contact Information -->
-            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm dark:bg-slate-900 dark:border-slate-800 flex flex-col justify-between h-full">
-                <div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-4">How to Reach Us</h2>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
-                        We are run by a small team of healthy eating enthusiasts. For general inquiries, cooking questions, or recipe suggestions, email is our primary connection!
-                    </p>
-                    
-                    <div class="space-y-4 mb-6">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl bg-slate-100 dark:bg-slate-800 p-2.5 rounded-xl block">✉️</span>
-                            <div>
-                                <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Email us directly</p>
-                                <a href="mailto:hello@yourdomainplaceholder.com" class="text-sm font-extrabold text-emerald-600 dark:text-emerald-400 hover:underline">hello@yourdomainplaceholder.com</a>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl bg-slate-100 dark:bg-slate-800 p-2.5 rounded-xl block">⏱️</span>
-                            <div>
-                                <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Estimated Response Time</p>
-                                <p class="text-sm font-extrabold text-slate-800 dark:text-white">Within 24 to 48 Hours</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 dark:bg-slate-800/50 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                    <strong>🛡️ Safety Tip:</strong> Please do not share sensitive personal information (like your phone number or home address) when sending us an email.
-                </div>
-            </div>
-
-            <!-- Right Card: Recipe Submissions Invite -->
-            <div class="bg-gradient-to-br from-emerald-600 to-teal-500 text-white p-8 rounded-3xl shadow-lg relative overflow-hidden group border border-emerald-500 h-full flex flex-col justify-between">
-                <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-white/10 rounded-full blur-xl group-hover:scale-125 transition-transform"></div>
-                <div class="relative z-10">
-                    <span class="bg-white/20 border border-white/30 text-white font-bold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider">We Want Your Recipes!</span>
-                    <h3 class="text-3xl font-extrabold mt-6 mb-4 leading-tight">Submit Your Wholesome Creations</h3>
-                    <p class="text-emerald-50 leading-relaxed font-medium text-sm mb-6">
-                        Are you a kitchen wizard who loves healthy fiber? We are highly interested in featuring community recipes on FiberFeasts! 
-                    </p>
-                    <p class="text-emerald-50 leading-relaxed font-medium text-sm mb-6">
-                        Send over your recipe detailing your ingredients, step-by-step instructions, and a little description of why you love it. If our test kitchen likes it, we'll build a custom interactive page for your recipe and attribute it to you!
-                    </p>
-                </div>
-                <a href="mailto:hello@yourdomainplaceholder.com?subject=My%20Fiber%20Recipe%20Submission" class="relative z-10 bg-white text-emerald-800 hover:bg-emerald-50 text-center font-extrabold py-3.5 px-6 rounded-2xl shadow-md transition-all transform active:scale-95 text-sm">
-                    📧 Submit a Recipe via Email
-                </a>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- Custom Pop-up Modal (Avoids ugly alerts) -->
-    <div id="custom-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 max-w-md w-full rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-2xl relative">
-            <h4 id="modal-title" class="text-2xl font-extrabold text-slate-900 dark:text-white mb-4"></h4>
-            <p id="modal-desc" class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm mb-6"></p>
-            <button onclick="closeModal()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full transition-colors shadow">Got it!</button>
-        </div>
-    </div>
-
-    <!-- Clean Footer -->
-    <footer class="mt-auto w-full py-12 text-center bg-slate-900 text-slate-400 border-t border-slate-800">
-        <div class="max-w-4xl mx-auto px-4">
-            <p class="text-white font-extrabold text-xl mb-4">🌾 FiberFeasts</p>
-            <p class="text-slate-505 text-sm mb-6 font-medium">&copy; 2026. Eat well, live well.</p>
-            <div class="flex justify-center space-x-6 text-sm font-bold">
-                <a href="index.html" class="text-slate-300 hover:text-emerald-400 transition-colors">Home</a>
-                <a href="contact.html" class="text-emerald-400 transition-colors">Contact</a>
-                <a href="privacy.html" class="text-slate-300 hover:text-emerald-400 transition-colors">Privacy Policy</a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Interactive Scripts for Theme Support and Responsive Navbar Drawer -->
-    <script>
-        // --- Mobile navigation drawer controllers ---
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const menuCloseBtn = document.getElementById('mobile-menu-close');
-        const menuDrawer = document.getElementById('mobile-menu');
-
-        menuBtn.addEventListener('click', () => {
-            menuDrawer.classList.remove('hidden');
-        });
-        menuCloseBtn.addEventListener('click', () => {
-            menuDrawer.classList.add('hidden');
-        });
-
-        // --- Modal Box Operations (Avoid raw browser alerts) ---
-        function alertModal(title, desc) {
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-desc').innerText = desc;
-            document.getElementById('custom-modal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('custom-modal').classList.add('hidden');
-        }
-
-        // --- Dark Mode Switch Engine ---
-        const themeBtn = document.getElementById('dark-mode-toggle');
-        const themeIcon = document.getElementById('dark-mode-icon');
-        const themeBtnMobile = document.getElementById('dark-mode-toggle-mobile');
-        const themeIconMobile = document.getElementById('dark-mode-icon-mobile');
-        
-        function updateThemeElements(isDark) {
-            if (isDark) {
-                document.documentElement.classList.add('dark');
-                themeIcon.innerText = "☀️";
-                themeIconMobile.innerText = "☀️";
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-                themeIcon.innerText = "🌙";
-                themeIconMobile.innerText = "🌙";
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        // Detect saved or system state on load
-        const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        updateThemeElements(savedTheme === 'dark' || (!savedTheme && systemPrefersDark));
-        
-        themeBtn.addEventListener('click', toggleTheme);
-        themeBtnMobile.addEventListener('click', toggleTheme);
-
-        function toggleTheme() {
-            const isCurrentlyDark = document.documentElement.classList.contains('dark');
-            updateThemeElements(!isCurrentlyDark);
-        }
-    </script>
-</body>
-</html>
+</main>
