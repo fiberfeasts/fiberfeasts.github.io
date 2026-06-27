@@ -4,24 +4,137 @@ layout: default
 <style>
     /* Printer-friendly layouts designed to force everything cleanly onto one single page */
     @media print {
-        @page { size: portrait; margin: 1.5cm !important; }
-        html, body { background: white !important; color: #0f172a !important; font-size: 10pt !important; line-height: 1.3 !important; height: 100% !important; margin: 0 !important; padding: 0 !important; }
-        body { display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; min-height: 90vh !important; }
-        .no-print, nav, footer, #dark-mode-toggle, .fixed, .bg-gradient-to-br, .bg-white.border-2.border-slate-950, button { display: none !important; }
-        main { padding: 0 !important; margin: 0 auto !important; max-width: 100% !important; width: 100% !important; flex-grow: 0 !important; }
-        header { width: 100% !important; padding-top: 0 !important; padding-bottom: 0.5rem !important; margin-bottom: 1rem !important; border-bottom: 2px solid #cbd5e1 !important; text-align: left !important; }
-        h1 { font-size: 20pt !important; margin-bottom: 0.25rem !important; text-align: left !important; line-height: 1.15 !important; font-weight: 800 !important; }
-        header p { font-size: 10.5pt !important; line-height: 1.35 !important; color: #334155 !important; text-align: left !important; }
-        .bg-white, .bg-slate-50, .border, .shadow-sm, .shadow-md { background: transparent !important; box-shadow: none !important; border: none !important; padding: 0 !important; margin-bottom: 0.5rem !important; }
-        .print-layout-grid { display: grid !important; grid-template-columns: 1fr 1.3fr !important; gap: 2rem !important; margin-top: 0.5rem !important; width: 100% !important; }
-        .print-ingredients-card h2 { font-size: 13pt !important; margin-bottom: 0.5rem !important; border-bottom: 1.5px solid #cbd5e1 !important; padding-bottom: 0.25rem !important; }
-        #ingredient-list { display: flex !important; flex-direction: column !important; gap: 0.4rem !important; }
+        @page { size: portrait; margin: 1cm !important; }
+        
+        html, body { 
+            background: white !important; 
+            color: #0f172a !important; 
+            font-size: 9pt !important; 
+            line-height: 1.25 !important; 
+            margin: 0 !important; 
+            padding: 0 !important;
+            height: auto !important;
+        }
+        
+        /* Hide all interactive elements, navigation, and lower page decorative blocks */
+        .no-print, nav, footer, #dark-mode-toggle, .fixed, .bg-gradient-to-br, button, .mt-16 { 
+            display: none !important; 
+        }
+        
+        main { 
+            padding: 0 !important; 
+            margin: 0 !important; 
+            max-width: 100% !important; 
+            width: 100% !important; 
+        }
+        
+        header { 
+            width: 100% !important; 
+            padding: 0 !important; 
+            margin-bottom: 1rem !important; 
+            border-bottom: 2px solid #cbd5e1 !important; 
+            text-align: left !important; 
+        }
+        
+        h1 { 
+            font-size: 18pt !important; 
+            margin-bottom: 0.25rem !important; 
+            text-align: left !important; 
+            line-height: 1.1 !important; 
+            font-weight: 800 !important; 
+        }
+        
+        header p { 
+            font-size: 9.5pt !important; 
+            line-height: 1.3 !important; 
+            color: #334155 !important; 
+            text-align: left !important; 
+            margin-bottom: 0.5rem !important;
+        }
+        
+        /* Strip background styling and gaps from containers */
+        .bg-white, .bg-slate-50, .border, .shadow-sm, .shadow-md { 
+            background: transparent !important; 
+            box-shadow: none !important; 
+            border: none !important; 
+            padding: 0 !important; 
+            margin: 0 !important; 
+        }
+        
+        /* Force 2-column layout for print */
+        .print-layout-grid { 
+            display: grid !important; 
+            grid-template-columns: 1fr 1.5fr !important; 
+            gap: 1.5rem !important; 
+            margin-top: 0 !important; 
+            width: 100% !important; 
+        }
+        
+        /* Tighten Ingredients list */
+        .print-ingredients-card h2 { 
+            font-size: 12pt !important; 
+            margin-bottom: 0.5rem !important; 
+            border-bottom: 1.5px solid #cbd5e1 !important; 
+            padding-bottom: 0.2rem !important; 
+            display: block !important;
+        }
+        
+        #ingredient-list { 
+            display: flex !important; 
+            flex-direction: column !important; 
+            gap: 0.25rem !important; 
+        }
+        
         .checkbox-box { display: none !important; }
-        .ingredient-item { font-size: 9pt !important; line-height: 1.3 !important; padding-left: 1rem !important; list-style-type: disc !important; display: list-item !important; opacity: 1 !important; text-decoration: none !important; }
-        .print-instructions-container h2 { font-size: 13pt !important; margin-bottom: 0.5rem !important; }
-        .step-item { page-break-inside: avoid; padding: 0.2rem 0 !important; margin-bottom: 0.25rem !important; display: flex !important; gap: 0.75rem !important; align-items: flex-start !important; opacity: 1 !important; text-decoration: none !important; }
-        .step-num { width: 1.5rem !important; height: 1.5rem !important; font-size: 8.5pt !important; font-weight: bold !important; background: #f1f5f9 !important; border: 1px solid #cbd5e1 !important; color: #0f172a !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-        .step-item p { font-size: 9pt !important; line-height: 1.3 !important; padding-top: 0 !important; color: #1e293b !important; text-decoration: none !important; opacity: 1 !important; }
+        
+        .ingredient-item { 
+            font-size: 8.5pt !important; 
+            line-height: 1.25 !important; 
+            padding-left: 1rem !important; 
+            list-style-type: disc !important; 
+            display: list-item !important; 
+            opacity: 1 !important; 
+            text-decoration: none !important; 
+        }
+        
+        /* Tighten Instructions list */
+        .print-instructions-container h2 { 
+            font-size: 12pt !important; 
+            margin-bottom: 0.5rem !important; 
+        }
+        
+        .step-item { 
+            page-break-inside: avoid; 
+            padding: 0 !important; 
+            margin-bottom: 0.4rem !important; 
+            display: flex !important; 
+            gap: 0.5rem !important; 
+            align-items: flex-start !important; 
+        }
+        
+        .step-num { 
+            width: 1.25rem !important; 
+            height: 1.25rem !important; 
+            font-size: 7.5pt !important; 
+            font-weight: bold !important; 
+            background: #f1f5f9 !important; 
+            border: 1px solid #cbd5e1 !important; 
+            color: #0f172a !important; 
+            display: flex !important; 
+            align-items: center !important; 
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+            print-color-adjust: exact; 
+            -webkit-print-color-adjust: exact; 
+        }
+        
+        .step-item p { 
+            font-size: 8.5pt !important; 
+            line-height: 1.25 !important; 
+            padding-top: 0 !important; 
+            margin: 0 !important;
+            color: #1e293b !important; 
+        }
     }
 
     /* Checkbox check animation styles */
@@ -42,7 +155,8 @@ layout: default
     <div id="cooking-progress" class="h-full bg-emerald-500 w-0 transition-all duration-300"></div>
 </div>
 
-<main class="flex-grow w-full max-w-4xl mx-auto px-4 py-12 md:py-20">
+<!-- Added pt-32 md:pt-40 to clear the fixed navbar -->
+<main class="flex-grow w-full max-w-4xl mx-auto px-4 pt-32 pb-12 md:pt-40 md:pb-20">
     
     <!-- Dynamic Header -->
     <header class="text-center mb-12">
@@ -56,7 +170,7 @@ layout: default
             {{ page.description }}
         </p>
 
-        <div class="flex flex-wrap justify-center gap-4 text-sm font-bold text-slate-700 dark:text-slate-200">
+        <div class="flex flex-wrap justify-center gap-4 text-sm font-bold text-slate-700 dark:text-slate-200 no-print">
             <div class="bg-white dark:bg-slate-900 px-4 py-3 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex items-center gap-2">
                 <span>🍽️</span> Serves: 1-{{ page.servings }}
             </div>
@@ -74,16 +188,19 @@ layout: default
         </p>
     </header>
 
-    <div class="grid md:grid-cols-3 gap-12">
+    <!-- Added print-layout-grid class back to ensure columns in print mode -->
+    <div class="grid md:grid-cols-3 gap-12 print-layout-grid">
         
         <!-- Ingredients Sidebar -->
         <aside class="md:col-span-1">
             <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 sticky top-24 print-ingredients-card">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4 mb-6 dark:border-slate-800">
+                
+                <!-- Fixed flex layout: stacks vertically so buttons never overlap the sidebar -->
+                <div class="flex flex-col gap-4 border-b border-slate-200 pb-4 mb-6 dark:border-slate-800">
                     <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">🛒 Ingredients</h2>
-                    <div class="flex gap-2 no-print">
+                    <div class="flex flex-wrap gap-2 no-print">
                         <button onclick="copyShoppingList()" class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold px-4 py-2 rounded-full transition-all dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
-                            📋 <span id="copy-text">Copy List</span>
+                            📋 <span id="copy-text">Copy</span>
                         </button>
                         <button onclick="resetIngredients()" class="inline-flex items-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-500 text-sm font-semibold px-4 py-2 rounded-full border border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-700">
                             Reset
@@ -149,7 +266,7 @@ layout: default
 
             <!-- Specific Recipe Fiber Fact -->
             {% if page.fiber_fact %}
-            <div class="mt-12 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 rounded-3xl p-6 md:p-8 flex items-start gap-4 shadow-sm">
+            <div class="mt-12 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 rounded-3xl p-6 md:p-8 flex items-start gap-4 shadow-sm no-print">
                 <div class="text-4xl animate-bounce">💡</div>
                 <div>
                     <h4 class="font-extrabold text-amber-900 dark:text-amber-500 text-xl mb-2">Fiber Fact!</h4>
@@ -162,10 +279,12 @@ layout: default
     </div>
 
     <!-- Extra dynamic content rendered beneath the core layout -->
-    <div class="mt-16">
+    <!-- Wrapped in a strict no-print container to save heavy physical paper real-estate -->
+    <div class="mt-16 no-print">
+        
         <!-- Pro Tips & Kitchen Customizations -->
         {% if page.pro_tips %}
-        <div class="bg-emerald-50/55 p-8 rounded-3xl border border-emerald-100 dark:bg-slate-900/60 dark:border-slate-800 no-print mb-12">
+        <div class="bg-emerald-50/55 p-8 rounded-3xl border border-emerald-100 dark:bg-slate-900/60 dark:border-slate-800 mb-12">
             <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-2">💡 Kitchen Pro-Tips & Customization</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Column A -->
@@ -229,7 +348,7 @@ layout: default
             </div>
 
             <!-- Global Fiber Fun Fact Deck -->
-            <div class="bg-gradient-to-br from-emerald-600 to-teal-500 rounded-3xl p-8 text-white flex flex-col justify-between shadow-lg relative overflow-hidden group border border-emerald-500 no-print">
+            <div class="bg-gradient-to-br from-emerald-600 to-teal-500 rounded-3xl p-8 text-white flex flex-col justify-between shadow-lg relative overflow-hidden group border border-emerald-500">
                 <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-white/10 rounded-full blur-xl group-hover:scale-125 transition-transform"></div>
                 <div>
                     <span class="bg-white/20 border border-white/30 text-white font-bold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider">Fiber Fun Fact</span>
@@ -244,7 +363,7 @@ layout: default
 
         <!-- FAQs -->
         {% if page.faqs %}
-        <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 dark:bg-slate-900 dark:border-slate-800 no-print mb-12">
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 dark:bg-slate-900 dark:border-slate-800 mb-12">
             <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-6">Frequently Asked Questions</h3>
             <div class="space-y-4">
                 {% for faq in page.faqs %}
@@ -261,7 +380,7 @@ layout: default
         {% endif %}
 
         <!-- Interactive Rating Block -->
-        <div class="relative bg-gradient-to-r from-teal-500 to-emerald-600 text-white p-8 rounded-3xl text-center shadow-lg no-print overflow-hidden mb-12">
+        <div class="relative bg-gradient-to-r from-teal-500 to-emerald-600 text-white p-8 rounded-3xl text-center shadow-lg overflow-hidden mb-12">
             <div class="relative z-10">
                 <h3 class="text-2xl font-extrabold mb-2">Show some love!</h3>
                 <p class="text-emerald-50 text-sm mb-4">Did you enjoy this high-fiber breakfast? Rate it below and send a virtual cheer!</p>
@@ -274,7 +393,7 @@ layout: default
             </div>
         </div>
 
-        <div class="text-center no-print">
+        <div class="text-center">
             <button onclick="window.print()" class="bg-slate-900 text-white hover:bg-emerald-600 font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2 dark:bg-white dark:text-slate-900 dark:hover:bg-emerald-400">
                 🖨️ Print Printer-Friendly Recipe Card
             </button>
@@ -454,7 +573,7 @@ layout: default
         document.body.removeChild(dummyArea);
         const btnText = document.getElementById('copy-text');
         btnText.innerText = "Copied!";
-        setTimeout(() => { btnText.innerText = "Copy List"; }, 2000);
+        setTimeout(() => { btnText.innerText = "Copy"; }, 2000);
     }
 
     // --- 5. Interactive Fiber Fun Facts Deck ---
