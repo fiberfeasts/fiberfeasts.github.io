@@ -1,0 +1,498 @@
+---
+layout: default
+---
+<style>
+    /* Printer-friendly layouts designed to force everything cleanly onto one single page */
+    @media print {
+        @page { size: portrait; margin: 1.5cm !important; }
+        html, body { background: white !important; color: #0f172a !important; font-size: 10pt !important; line-height: 1.3 !important; height: 100% !important; margin: 0 !important; padding: 0 !important; }
+        body { display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; min-height: 90vh !important; }
+        .no-print, nav, footer, #dark-mode-toggle, .fixed, .bg-gradient-to-br, .bg-white.border-2.border-slate-950, button { display: none !important; }
+        main { padding: 0 !important; margin: 0 auto !important; max-width: 100% !important; width: 100% !important; flex-grow: 0 !important; }
+        header { width: 100% !important; padding-top: 0 !important; padding-bottom: 0.5rem !important; margin-bottom: 1rem !important; border-bottom: 2px solid #cbd5e1 !important; text-align: left !important; }
+        h1 { font-size: 20pt !important; margin-bottom: 0.25rem !important; text-align: left !important; line-height: 1.15 !important; font-weight: 800 !important; }
+        header p { font-size: 10.5pt !important; line-height: 1.35 !important; color: #334155 !important; text-align: left !important; }
+        .bg-white, .bg-slate-50, .border, .shadow-sm, .shadow-md { background: transparent !important; box-shadow: none !important; border: none !important; padding: 0 !important; margin-bottom: 0.5rem !important; }
+        .print-layout-grid { display: grid !important; grid-template-columns: 1fr 1.3fr !important; gap: 2rem !important; margin-top: 0.5rem !important; width: 100% !important; }
+        .print-ingredients-card h2 { font-size: 13pt !important; margin-bottom: 0.5rem !important; border-bottom: 1.5px solid #cbd5e1 !important; padding-bottom: 0.25rem !important; }
+        #ingredient-list { display: flex !important; flex-direction: column !important; gap: 0.4rem !important; }
+        .checkbox-box { display: none !important; }
+        .ingredient-item { font-size: 9pt !important; line-height: 1.3 !important; padding-left: 1rem !important; list-style-type: disc !important; display: list-item !important; opacity: 1 !important; text-decoration: none !important; }
+        .print-instructions-container h2 { font-size: 13pt !important; margin-bottom: 0.5rem !important; }
+        .step-item { page-break-inside: avoid; padding: 0.2rem 0 !important; margin-bottom: 0.25rem !important; display: flex !important; gap: 0.75rem !important; align-items: flex-start !important; opacity: 1 !important; text-decoration: none !important; }
+        .step-num { width: 1.5rem !important; height: 1.5rem !important; font-size: 8.5pt !important; font-weight: bold !important; background: #f1f5f9 !important; border: 1px solid #cbd5e1 !important; color: #0f172a !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .step-item p { font-size: 9pt !important; line-height: 1.3 !important; padding-top: 0 !important; color: #1e293b !important; text-decoration: none !important; opacity: 1 !important; }
+    }
+
+    /* Checkbox check animation styles */
+    .ingredient-item.checked { opacity: 0.5; text-decoration: line-through; }
+    .step-item.completed .step-num { background-color: #10b981 !important; border-color: #059669 !important; color: white !important; }
+    .step-item.completed p { opacity: 0.5; text-decoration: line-through; }
+
+    /* Transitions */
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease; }
+    .faq-item.active .faq-answer { max-height: 200px; padding-top: 1rem; }
+    .faq-item.active .faq-chevron { transform: rotate(180deg); }
+    @keyframes floatHeart { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-100px) scale(0.6); opacity: 0; } }
+    .heart-float { animation: floatHeart 1s forwards ease-out; }
+</style>
+
+<!-- Progress Indicator Bar -->
+<div class="fixed top-0 left-0 w-full h-1.5 bg-slate-200 z-50 no-print dark:bg-slate-800">
+    <div id="cooking-progress" class="h-full bg-emerald-500 w-0 transition-all duration-300"></div>
+</div>
+
+<main class="flex-grow w-full max-w-4xl mx-auto px-4 py-12 md:py-20">
+    
+    <!-- Dynamic Header -->
+    <header class="text-center mb-12">
+        <span class="inline-block py-1.5 px-4 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400 text-xs font-extrabold uppercase tracking-widest mb-4 border border-emerald-200 dark:border-emerald-800/50">
+            {{ page.category_label }}
+        </span>
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white">
+            {{ page.title }}
+        </h1>
+        <p class="text-slate-600 dark:text-slate-300 text-lg mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
+            {{ page.description }}
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4 text-sm font-bold text-slate-700 dark:text-slate-200">
+            <div class="bg-white dark:bg-slate-900 px-4 py-3 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex items-center gap-2">
+                <span>🍽️</span> Serves: 1-{{ page.servings }}
+            </div>
+            <div class="bg-white dark:bg-slate-900 px-4 py-3 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex items-center gap-2">
+                <span>⏱️</span> Prep Time: {{ page.prep_time }}
+            </div>
+            <div class="bg-white dark:bg-slate-900 px-4 py-3 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex items-center gap-2">
+                <span>❄️</span> Chill Time: {{ page.chill_time }}
+            </div>
+        </div>
+
+        <!-- Inline Nutrition for Paper Printouts -->
+        <p class="hidden print:block text-xs font-bold text-emerald-700 mt-2">
+            🌾 Nutrition per Serving: {{ page.nutrition.calories }} Calories | {{ page.nutrition.fat }}g Fat | {{ page.nutrition.carbs }}g Carbs | {{ page.nutrition.fiber }}g Dietary Fiber | {{ page.nutrition.protein }}g Protein
+        </p>
+    </header>
+
+    <div class="grid md:grid-cols-3 gap-12">
+        
+        <!-- Ingredients Sidebar -->
+        <aside class="md:col-span-1">
+            <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 sticky top-24 print-ingredients-card">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4 mb-6 dark:border-slate-800">
+                    <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">🛒 Ingredients</h2>
+                    <div class="flex gap-2 no-print">
+                        <button onclick="copyShoppingList()" class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold px-4 py-2 rounded-full transition-all dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
+                            📋 <span id="copy-text">Copy List</span>
+                        </button>
+                        <button onclick="resetIngredients()" class="inline-flex items-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-500 text-sm font-semibold px-4 py-2 rounded-full border border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-700">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+                
+                <ul id="ingredient-list" class="space-y-4">
+                    {% for item in page.ingredients %}
+                    <li onclick="toggleIngredient(this)" class="ingredient-item flex items-start gap-3 cursor-pointer group">
+                        <div class="checkbox-box mt-1 w-5 h-5 rounded border-2 border-emerald-500 flex-shrink-0 group-hover:bg-emerald-50 transition-colors flex items-center justify-center dark:group-hover:bg-slate-800">
+                            <span class="checkmark hidden text-xs text-emerald-500 font-extrabold">✓</span>
+                        </div>
+                        <span class="text-slate-800 font-medium dark:text-slate-200 text-sm leading-snug">
+                            <strong data-base-val="{{ item.base_val }}" class="amount">{{ item.display }}</strong> <span class="unit">{{ item.unit }}</span> <span class="name">{{ item.name }}</span>
+                            {% if item.note %}<span class="text-slate-400 text-xs block">{{ item.note }}</span>{% endif %}
+                        </span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Instructions Section -->
+        <section class="md:col-span-2">
+            <div class="flex items-center justify-between mb-8 border-b-2 border-slate-100 dark:border-slate-800 pb-4 no-print">
+                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Let's Get Cooking!</h2>
+                <button onclick="resetInstructions()" class="text-sm font-bold text-slate-400 hover:text-emerald-600 transition-colors">Reset Checklist</button>
+            </div>
+            
+            <div class="space-y-8 print-instructions-container">
+                <h2 class="hidden print:block text-2xl font-extrabold text-slate-900 dark:text-white mb-2">Instructions</h2>
+                {% for step in page.instructions %}
+                <div id="step-{{ forloop.index }}" class="step-item flex {% if step.timer %}flex-col{% endif %} gap-{% if step.timer %}4{% else %}6{% endif %} p-4 rounded-2xl hover:bg-slate-100/50 dark:hover:bg-slate-900/50 transition-all cursor-pointer" onclick="{% if step.timer %}stepClickHandled({{ forloop.index }}, event){% else %}toggleStep({{ forloop.index }}){% endif %}">
+                    
+                    <div class="flex gap-4" {% if step.timer %}onclick="toggleStep({{ forloop.index }})"{% endif %}>
+                        <div class="step-num flex-shrink-0 w-10 h-10 rounded-full {% if forloop.last %}bg-emerald-200 border border-emerald-300 text-emerald-900{% else %}bg-emerald-600 border border-emerald-600 text-white{% endif %} font-extrabold flex items-center justify-center shadow-md dark:bg-emerald-700">
+                            {{ forloop.index }}
+                        </div>
+                        <div>
+                            <p class="text-lg {% if forloop.last %}text-slate-900 font-bold dark:text-white{% else %}text-slate-700 font-medium dark:text-slate-300{% endif %} leading-relaxed pt-1">{{ step.text }}</p>
+                        </div>
+                    </div>
+
+                    {% if step.timer %}
+                    <div class="ml-14 p-6 bg-white border border-slate-200 rounded-2xl max-w-sm flex items-center justify-between shadow-sm dark:bg-slate-800 dark:border-slate-700 no-print">
+                        <div class="flex items-center gap-4">
+                            <span class="text-3xl">⏱️</span>
+                            <div>
+                                <p class="text-xs text-slate-500 font-bold uppercase dark:text-slate-400">Step {{ forloop.index }} Timer</p>
+                                <p id="timer-display" class="text-2xl font-extrabold text-slate-900 tracking-wider dark:text-white">{{ step.timer_display }}</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="toggleTimer()" id="timer-ctrl" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full text-sm transition-colors shadow">Start</button>
+                            <button onclick="resetTimer()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2 px-4 rounded-full text-sm transition-colors dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600">Reset</button>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Specific Recipe Fiber Fact -->
+            {% if page.fiber_fact %}
+            <div class="mt-12 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 rounded-3xl p-6 md:p-8 flex items-start gap-4 shadow-sm">
+                <div class="text-4xl animate-bounce">💡</div>
+                <div>
+                    <h4 class="font-extrabold text-amber-900 dark:text-amber-500 text-xl mb-2">Fiber Fact!</h4>
+                    <p class="text-amber-800 dark:text-amber-200 font-medium leading-relaxed">{{ page.fiber_fact }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+        </section>
+    </div>
+
+    <!-- Extra dynamic content rendered beneath the core layout -->
+    <div class="mt-16">
+        <!-- Pro Tips & Kitchen Customizations -->
+        {% if page.pro_tips %}
+        <div class="bg-emerald-50/55 p-8 rounded-3xl border border-emerald-100 dark:bg-slate-900/60 dark:border-slate-800 no-print mb-12">
+            <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-2">💡 Kitchen Pro-Tips & Customization</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Column A -->
+                <div class="space-y-4">
+                    {% for tip in page.pro_tips %}
+                    {% assign mod = forloop.index | modulo: 2 %}
+                    {% if mod != 0 %}
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 dark:bg-slate-800 dark:border-slate-700">
+                        <h4 class="font-bold text-emerald-700 dark:text-emerald-400 mb-1">{{ tip.title }}</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{{ tip.text }}</p>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <!-- Column B -->
+                <div class="space-y-4">
+                    {% for tip in page.pro_tips %}
+                    {% assign mod = forloop.index | modulo: 2 %}
+                    {% if mod == 0 %}
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 dark:bg-slate-800 dark:border-slate-700">
+                        <h4 class="font-bold text-emerald-700 dark:text-emerald-400 mb-1">{{ tip.title }}</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{{ tip.text }}</p>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Two Column Block: Nutrition & Fun Fact System -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- Nutrition Panel -->
+            <div class="bg-white border-2 border-slate-950 p-6 shadow-md dark:bg-slate-900 dark:border-slate-800 dark:border-b-white">
+                <h4 class="text-2xl font-black uppercase tracking-tight border-b-8 border-slate-950 pb-2 dark:border-slate-700 dark:text-white">Nutrition Facts</h4>
+                <p class="text-sm font-semibold border-b border-slate-950 py-1 dark:border-slate-700">Servings: <span id="nutrition-servings">{{ page.servings }}</span> (Values represent totals for prep quantity)</p>
+                <div class="flex justify-between items-end border-b-4 border-slate-950 py-2 dark:border-slate-700">
+                    <div>
+                        <p class="text-sm font-bold">Amount Per Serving</p>
+                        <p class="text-3xl font-black">Calories</p>
+                    </div>
+                    <!-- Uses Liquid templating to pre-scale the visual math -->
+                    <p class="text-3xl font-black" id="nutrition-calories">{{ page.nutrition.calories | times: page.servings | round }}</p>
+                </div>
+                <div class="border-b border-slate-950 py-2 flex justify-between font-bold dark:border-slate-700">
+                    <p>Total Fat</p>
+                    <p><span id="nutrition-fat">{{ page.nutrition.fat | times: page.servings | round }}</span>g</p>
+                </div>
+                <div class="border-b border-slate-950 py-2 flex justify-between font-bold dark:border-slate-700">
+                    <p>Carbohydrates</p>
+                    <p><span id="nutrition-carbs">{{ page.nutrition.carbs | times: page.servings | round }}</span>g</p>
+                </div>
+                <div class="border-b-4 border-slate-950 py-2 flex justify-between font-black text-emerald-600 dark:text-emerald-400 dark:border-slate-700">
+                    <p class="flex items-center gap-1">🌾 Dietary Fiber</p>
+                    <p><span id="nutrition-fiber">{{ page.nutrition.fiber | times: page.servings | round }}</span>g</p>
+                </div>
+                <div class="border-b border-slate-950 py-2 flex justify-between font-bold dark:border-slate-700">
+                    <p>Protein</p>
+                    <p><span id="nutrition-protein">{{ page.nutrition.protein | times: page.servings | round }}</span>g</p>
+                </div>
+            </div>
+
+            <!-- Global Fiber Fun Fact Deck -->
+            <div class="bg-gradient-to-br from-emerald-600 to-teal-500 rounded-3xl p-8 text-white flex flex-col justify-between shadow-lg relative overflow-hidden group border border-emerald-500 no-print">
+                <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-white/10 rounded-full blur-xl group-hover:scale-125 transition-transform"></div>
+                <div>
+                    <span class="bg-white/20 border border-white/30 text-white font-bold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider">Fiber Fun Fact</span>
+                    <h4 class="text-3xl font-extrabold mt-6 mb-4 font-serif italic">Why Chia Seeds?</h4>
+                    <p id="fun-fact-text" class="text-emerald-50 leading-relaxed font-medium transition-opacity duration-300">Chia seeds can expand to 10-12 times their weight in water! This magic gel-like absorption turns liquid into rich pudding completely naturally.</p>
+                </div>
+                <div class="mt-8">
+                    <button onclick="changeFact()" class="bg-white text-emerald-800 hover:bg-emerald-50 font-bold px-6 py-2.5 rounded-full text-sm transition-all shadow-md transform active:scale-95">Next Fun Fact &rarr;</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQs -->
+        {% if page.faqs %}
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 dark:bg-slate-900 dark:border-slate-800 no-print mb-12">
+            <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-6">Frequently Asked Questions</h3>
+            <div class="space-y-4">
+                {% for faq in page.faqs %}
+                <div class="faq-item border-b border-slate-150 pb-4 dark:border-slate-800 cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-slate-800 dark:text-slate-200">{{ faq.question }}</span>
+                        <span class="faq-chevron transform transition-transform duration-200 text-slate-400">▼</span>
+                    </div>
+                    <p class="faq-answer text-slate-600 dark:text-slate-400 text-sm mt-2">{{ faq.answer }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Interactive Rating Block -->
+        <div class="relative bg-gradient-to-r from-teal-500 to-emerald-600 text-white p-8 rounded-3xl text-center shadow-lg no-print overflow-hidden mb-12">
+            <div class="relative z-10">
+                <h3 class="text-2xl font-extrabold mb-2">Show some love!</h3>
+                <p class="text-emerald-50 text-sm mb-4">Did you enjoy this high-fiber breakfast? Rate it below and send a virtual cheer!</p>
+                <div class="flex justify-center items-center gap-6 mt-4">
+                    <button onclick="animateLove(event)" class="relative group bg-white text-emerald-800 hover:bg-emerald-50 font-extrabold px-6 py-3 rounded-full shadow-md flex items-center gap-2 transform active:scale-95 transition-all">
+                        <span>❤️ Send Heart</span>
+                        <span id="love-counter" class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full text-xs">42</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center no-print">
+            <button onclick="window.print()" class="bg-slate-900 text-white hover:bg-emerald-600 font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2 dark:bg-white dark:text-slate-900 dark:hover:bg-emerald-400">
+                🖨️ Print Printer-Friendly Recipe Card
+            </button>
+        </div>
+    </div>
+</main>
+
+<script>
+    // --- 1. Portion Scaler Configuration ---
+    const DEFAULT_SERVINGS = {{ page.servings | default: 2 }};
+    let currentScale = DEFAULT_SERVINGS;
+
+    function formatFraction(amount) {
+        if (amount % 1 === 0) return amount.toString();
+        const whole = Math.floor(amount);
+        const dec = amount - whole;
+        const tolerance = 0.01;
+        let fracStr = "";
+        if (Math.abs(dec - 0.125) < tolerance) fracStr = "⅛";
+        else if (Math.abs(dec - 0.25) < tolerance) fracStr = "¼";
+        else if (Math.abs(dec - 0.375) < tolerance) fracStr = "⅜";
+        else if (Math.abs(dec - 0.5) < tolerance) fracStr = "½";
+        else if (Math.abs(dec - 0.625) < tolerance) fracStr = "⅝";
+        else if (Math.abs(dec - 0.75) < tolerance) fracStr = "¾";
+        else if (Math.abs(dec - 0.875) < tolerance) fracStr = "⅞";
+        else return amount.toFixed(1).replace(/\.0$/, '');
+        return whole > 0 ? `${whole} ${fracStr}` : fracStr;
+    }
+
+    function scaleServings(step) {
+        let nextScale = currentScale + step;
+        if (nextScale < 1) nextScale = 1;
+        if (nextScale > 10) nextScale = 10;
+        currentScale = nextScale;
+
+        document.getElementById('servings-value').innerText = currentScale;
+        const scaleInd = document.getElementById('scale-indicator');
+        if(scaleInd) scaleInd.innerText = currentScale;
+
+        const amounts = document.querySelectorAll('.amount');
+        amounts.forEach(el => {
+            const baseVal = parseFloat(el.getAttribute('data-base-val'));
+            const newVal = baseVal * currentScale;
+            el.innerText = formatFraction(newVal);
+        });
+
+        document.getElementById('nutrition-servings').innerText = currentScale;
+        document.getElementById('nutrition-calories').innerText = Math.round({{ page.nutrition.calories | default: 0 }} * currentScale);
+        document.getElementById('nutrition-fat').innerText = Math.round({{ page.nutrition.fat | default: 0 }} * currentScale);
+        document.getElementById('nutrition-carbs').innerText = Math.round({{ page.nutrition.carbs | default: 0 }} * currentScale);
+        document.getElementById('nutrition-fiber').innerText = Math.round({{ page.nutrition.fiber | default: 0 }} * currentScale);
+        document.getElementById('nutrition-protein').innerText = Math.round({{ page.nutrition.protein | default: 0 }} * currentScale);
+    }
+
+    // --- 2. Interactive Checklists ---
+    function toggleIngredient(element) {
+        element.classList.toggle('checked');
+        const check = element.querySelector('.checkmark');
+        const box = element.querySelector('.checkbox-box');
+        if (element.classList.contains('checked')) {
+            check.classList.remove('hidden');
+            box.classList.add('bg-emerald-50', 'dark:bg-slate-800');
+        } else {
+            check.classList.add('hidden');
+            box.classList.remove('bg-emerald-50', 'dark:bg-slate-800');
+        }
+    }
+
+    function toggleStep(stepNum) {
+        const stepEl = document.getElementById(`step-${stepNum}`);
+        stepEl.classList.toggle('completed');
+        updateProgress();
+    }
+
+    function stepClickHandled(stepNum, event) {
+        if (event.target.tagName !== 'BUTTON') { toggleStep(stepNum); }
+    }
+
+    function updateProgress() {
+        const steps = document.querySelectorAll('.step-item');
+        const completed = document.querySelectorAll('.step-item.completed');
+        if(steps.length > 0) {
+            const pct = Math.round((completed.length / steps.length) * 100);
+            document.getElementById('cooking-progress').style.width = `${pct}%`;
+        }
+    }
+
+    function resetIngredients() {
+        document.querySelectorAll('.ingredient-item').forEach(el => {
+            el.classList.remove('checked');
+            el.querySelector('.checkmark').classList.add('hidden');
+            el.querySelector('.checkbox-box').classList.remove('bg-emerald-50', 'dark:bg-slate-800');
+        });
+    }
+
+    function resetInstructions() {
+        document.querySelectorAll('.step-item').forEach(el => { el.classList.remove('completed'); });
+        updateProgress();
+    }
+
+    // --- 3. Built-in Kitchen Timer ---
+    let timerSeconds = 300; 
+    let timerInterval = null;
+
+    function toggleTimer() {
+        const btn = document.getElementById('timer-ctrl');
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            btn.innerText = "Resume";
+            btn.className = "bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-full text-sm transition-colors shadow";
+        } else {
+            btn.innerText = "Pause";
+            btn.className = "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full text-sm transition-colors shadow";
+            timerInterval = setInterval(() => {
+                timerSeconds--;
+                updateTimerDisplay();
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    btn.innerText = "Start";
+                    btn.className = "bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full text-sm transition-colors shadow";
+                    timerSeconds = 300;
+                    playAlarmChime();
+                }
+            }, 1000);
+        }
+    }
+
+    function resetTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timerSeconds = 300;
+        updateTimerDisplay();
+        const btn = document.getElementById('timer-ctrl');
+        btn.innerText = "Start";
+        btn.className = "bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full text-sm transition-colors shadow";
+    }
+
+    function updateTimerDisplay() {
+        const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+        const secs = (timerSeconds % 60).toString().padStart(2, '0');
+        const disp = document.getElementById('timer-display');
+        if(disp) disp.innerText = `${mins}:${secs}`;
+    }
+
+    function playAlarmChime() {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(587.33, ctx.currentTime); 
+        osc.frequency.setValueAtTime(880.00, ctx.currentTime + 0.15); 
+        gain.gain.setValueAtTime(0.5, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.8);
+    }
+
+    // --- 4. Copy to Clipboard Utility ---
+    function copyShoppingList() {
+        const listItems = document.querySelectorAll('.ingredient-item');
+        let listText = "FiberFeasts Shopping List:\n";
+        listItems.forEach(el => {
+            const amt = el.querySelector('.amount').innerText;
+            const unit = el.querySelector('.unit').innerText;
+            const name = el.querySelector('.name').innerText;
+            listText += `- ${amt} ${unit} ${name}\n`;
+        });
+        const dummyArea = document.createElement("textarea");
+        document.body.appendChild(dummyArea);
+        dummyArea.value = listText;
+        dummyArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummyArea);
+        const btnText = document.getElementById('copy-text');
+        btnText.innerText = "Copied!";
+        setTimeout(() => { btnText.innerText = "Copy List"; }, 2000);
+    }
+
+    // --- 5. Interactive Fiber Fun Facts Deck ---
+    const fiberFacts = [
+        "Chia seeds can expand to 10-12 times their weight in water! This magic gel-like absorption turns liquid into rich pudding completely naturally.",
+        "Just 2 tablespoons of chia seeds pack a massive 10 grams of dietary fiber! That is about one-third of your entire recommended intake for the day.",
+        "Bananas are a fantastic source of soluble fiber, which forms a gentle gel during digestion, helping keeping you feel happily full and energized.",
+        "Peanut Butter is not only packed with healthy fats and protein, but also contains useful prebiotic fiber to feed your good stomach cells!",
+        "Eating dietary fiber can assist with long-term heart health, supports easy digestion, and maintains super-steady energy releases without the crash!"
+    ];
+
+    let currentFactIdx = 0;
+    function changeFact() {
+        const txt = document.getElementById('fun-fact-text');
+        txt.style.opacity = '0';
+        setTimeout(() => {
+            currentFactIdx = (currentFactIdx + 1) % fiberFacts.length;
+            txt.innerText = fiberFacts[currentFactIdx];
+            txt.style.opacity = '1';
+        }, 300);
+    }
+
+    // --- 6. Collapsible FAQ Handler ---
+    function toggleFaq(element) { element.classList.toggle('active'); }
+
+    // --- 7. Interactive Rating & Hearts Animation ---
+    let loveVotes = 42;
+    function animateLove(event) {
+        loveVotes++;
+        document.getElementById('love-counter').innerText = loveVotes;
+        const btn = event.currentTarget;
+        const rect = btn.getBoundingClientRect();
+        const heart = document.createElement('span');
+        heart.innerText = "❤️";
+        heart.className = "absolute heart-float text-xl pointer-events-none select-none z-50";
+        heart.style.left = `${event.clientX - rect.left - 10}px`;
+        heart.style.top = `${event.clientY - rect.top - 20}px`;
+        btn.appendChild(heart);
+        setTimeout(() => { heart.remove(); }, 1000);
+    }
+</script>
