@@ -4,96 +4,134 @@ title: Home
 ---
 
 <!-- Hero / Banner Section -->
-<header class="w-full pt-40 pb-28 text-center px-4 bg-white dark:bg-slate-950 border-b border-slate-150 dark:border-slate-900">
-    <div class="max-w-3xl mx-auto">
+<header class="w-full pt-40 pb-24 text-center px-4 bg-gradient-to-b from-emerald-50/50 to-white dark:from-slate-900 dark:to-slate-950 border-b border-slate-150 dark:border-slate-900 relative overflow-hidden">
+    <!-- Background Decorative Elements -->
+    <div class="absolute top-20 left-10 w-72 h-72 bg-emerald-300/20 rounded-full blur-3xl dark:bg-emerald-900/20 pointer-events-none"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-teal-300/20 rounded-full blur-3xl dark:bg-teal-900/20 pointer-events-none"></div>
+
+    <div class="max-w-3xl mx-auto relative z-10">
         <!-- Healthy Badge -->
-        <span class="inline-block py-1.5 px-3.5 rounded-full bg-emerald-100 text-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-300 text-xs font-extrabold uppercase tracking-widest mb-6 border border-emerald-200 dark:border-emerald-900">
+        <span class="inline-block py-1.5 px-4 rounded-full bg-white dark:bg-slate-800 text-emerald-700 dark:text-emerald-400 text-xs font-extrabold uppercase tracking-widest mb-6 border border-emerald-200 dark:border-emerald-800/50 shadow-sm transition-transform hover:scale-105 cursor-default">
             🌱 Wholesome & High-Fiber Cooking
         </span>
         
         <!-- Sleek Gradient Title -->
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 dark:from-emerald-400 dark:to-teal-500 drop-shadow-sm">
-            Feel Full. Feel Great.
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight text-slate-900 dark:text-white drop-shadow-sm">
+            Feel Full. <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-400">Feel Great.</span>
         </h1>
-        <p class="text-lg md:text-xl text-slate-700 dark:text-slate-300 mb-10 max-w-xl mx-auto font-medium leading-relaxed">
+        <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-10 max-w-xl mx-auto font-medium leading-relaxed">
             Delicious, high-fiber recipes built to keep your digestion smooth, your energy high, and your tastebuds happy.
         </p>
         
         <!-- Live Action Search Bar wrapped in a safe Form element -->
-        <form onsubmit="event.preventDefault();" class="relative max-w-xl mx-auto transform transition-all hover:-translate-y-0.5">
-            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="h-6 w-6 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <form onsubmit="event.preventDefault();" class="relative max-w-xl mx-auto transform transition-all hover:-translate-y-0.5 z-50">
+            <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                <svg class="h-6 w-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
             </div>
-            <input type="text" id="recipe-search" oninput="handleSearch()" placeholder="Try searching 'Banana', 'Oats', 'Lentils'..." required
-                class="w-full pl-12 pr-32 py-5 rounded-full border-2 border-slate-300 dark:border-slate-700 shadow-lg bg-white dark:bg-slate-900 text-lg text-slate-900 dark:text-white placeholder-slate-400 focus:border-emerald-500 dark:focus:border-emerald-400 focus:outline-none transition-all">
+            <input type="text" id="recipe-search" oninput="handleSearch()" placeholder="Search 'Oats', 'Lentils', or 'Snacks'..." autocomplete="off"
+                class="w-full pl-14 pr-32 py-5 rounded-full border-2 border-slate-200 dark:border-slate-700 shadow-xl bg-white dark:bg-slate-900 text-lg text-slate-900 dark:text-white placeholder-slate-400 focus:border-emerald-500 dark:focus:border-emerald-500 focus:outline-none transition-all">
             <button type="button" onclick="clearSearch()" class="absolute right-2 top-2 bottom-2 bg-slate-900 text-white dark:bg-slate-800 px-6 rounded-full font-bold hover:bg-emerald-600 dark:hover:bg-emerald-500 transition-colors shadow-md text-sm">
-                Reset
+                Clear
             </button>
 
             <!-- Real-time Autocomplete Suggestion Dropdown Panel -->
-            <div id="search-dropdown" class="hidden absolute left-0 right-0 top-full mt-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl p-2 z-50 max-h-80 overflow-y-auto">
+            <div id="search-dropdown" class="hidden absolute left-0 right-0 top-full mt-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl p-2 z-50 max-h-80 overflow-y-auto text-left">
                 <!-- Javascript populates items here in real-time -->
             </div>
         </form>
+
+        <!-- Quick Search Tags -->
+        <div class="flex flex-wrap justify-center gap-2 mt-6">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mr-2 self-center">Quick Search:</p>
+            <button onclick="document.getElementById('recipe-search').value='vegan'; handleSearch();" class="text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3 py-1.5 rounded-full hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Vegan</button>
+            <button onclick="document.getElementById('recipe-search').value='protein'; handleSearch();" class="text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3 py-1.5 rounded-full hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">High Protein</button>
+            <button onclick="document.getElementById('recipe-search').value='quick'; handleSearch();" class="text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3 py-1.5 rounded-full hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Under 30 Mins</button>
+        </div>
     </div>
 </header>
 
 <!-- Main Content Section -->
-<main class="flex-grow w-full bg-slate-100 py-16 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
-    <div class="max-w-5xl mx-auto px-4">
+<main class="flex-grow w-full bg-slate-50 py-16 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4">
         
         <!-- Category Shortcuts Panel -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-            <a href="/recipes/breakfast/" class="p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm hover:shadow-md transition-all text-left flex items-center justify-between group">
-                <div class="flex items-center gap-4">
-                    <span class="text-3xl bg-emerald-100 dark:bg-slate-700 p-3 rounded-2xl group-hover:rotate-6 transition-transform">🥣</span>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+            <a href="/recipes/breakfast/" class="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all text-left flex items-center justify-between group">
+                <div class="flex items-center gap-5">
+                    <span class="text-4xl bg-blue-50 dark:bg-slate-800 p-4 rounded-2xl group-hover:rotate-6 transition-transform">🥣</span>
                     <div>
-                        <h4 class="font-extrabold text-slate-900 dark:text-white">Breakfast Collection</h4>
-                        <p class="text-slate-505 dark:text-slate-400 text-xs">Oatmeal, Chia Bowls & More</p>
+                        <h4 class="font-extrabold text-slate-900 dark:text-white text-lg">Breakfasts</h4>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Oats & Chia Bowls</p>
                     </div>
                 </div>
-                <span class="text-emerald-500 font-bold">&rarr;</span>
             </a>
-            <a href="/recipes/lunch-and-dinner/" class="p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm hover:shadow-md transition-all text-left flex items-center justify-between group">
-                <div class="flex items-center gap-4">
-                    <span class="text-3xl bg-amber-100 dark:bg-slate-700 p-3 rounded-2xl group-hover:rotate-6 transition-transform">🍲</span>
+            <a href="/recipes/lunch-and-dinner/" class="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all text-left flex items-center justify-between group">
+                <div class="flex items-center gap-5">
+                    <span class="text-4xl bg-orange-50 dark:bg-slate-800 p-4 rounded-2xl group-hover:rotate-6 transition-transform">🍲</span>
                     <div>
-                        <h4 class="font-extrabold text-slate-900 dark:text-white">Lunches & Dinners</h4>
-                        <p class="text-slate-505 dark:text-slate-400 text-xs">Hearty Stews & Zesty Salads</p>
+                        <h4 class="font-extrabold text-slate-900 dark:text-white text-lg">Mains</h4>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Stews & Salads</p>
                     </div>
                 </div>
-                <span class="text-emerald-500 font-bold">&rarr;</span>
             </a>
-            <a href="/recipes/snacks-and-sweets/" class="p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm hover:shadow-md transition-all text-left flex items-center justify-between group">
-                <div class="flex items-center gap-4">
-                    <span class="text-3xl bg-pink-100 dark:bg-slate-700 p-3 rounded-2xl group-hover:rotate-6 transition-transform">🍰</span>
+            <a href="/recipes/snacks-and-sweets/" class="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all text-left flex items-center justify-between group">
+                <div class="flex items-center gap-5">
+                    <span class="text-4xl bg-pink-50 dark:bg-slate-800 p-4 rounded-2xl group-hover:rotate-6 transition-transform">🍰</span>
                     <div>
-                        <h4 class="font-extrabold text-slate-900 dark:text-white">Sweets & Snacks</h4>
-                        <p class="text-slate-505 dark:text-slate-400 text-xs">Guilt-Free High-Fiber Treats</p>
+                        <h4 class="font-extrabold text-slate-900 dark:text-white text-lg">Treats</h4>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Guilt-Free Snacks</p>
                     </div>
                 </div>
-                <span class="text-emerald-500 font-bold">&rarr;</span>
             </a>
         </div>
 
         <!-- Recipe Grid Title -->
-        <div class="flex items-center justify-between mb-8">
-            <h2 id="grid-title" class="text-3xl font-extrabold text-slate-900 dark:text-white">Trending High-Fiber Recipes</h2>
-            <span id="result-count" class="text-xs bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold px-3 py-1 rounded-full">Showing 6 recipes</span>
+        <div class="flex items-center justify-between mb-8 border-b border-slate-200 dark:border-slate-800 pb-4">
+            <h2 id="grid-title" class="text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">🔥 Trending Recipes</h2>
+            <a href="/recipes/" class="text-sm text-emerald-600 dark:text-emerald-400 font-bold hover:underline">View All &rarr;</a>
         </div>
         
         <!-- Real-time Recipe Container -->
-        <div id="recipe-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="recipe-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             <!-- Recipes are compiled and injected directly by JavaScript -->
+        </div>
+
+        <!-- Why Fiber Info Block -->
+        <div class="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-800 text-white relative no-print">
+            <!-- Decorative background blob -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="p-10 md:p-14 relative z-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-4">The Fiber Advantage</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto mb-12 text-lg">Why are we so obsessed with fiber? Most people only eat half of their recommended daily intake! Hitting your fiber goals can completely transform how you feel.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/50 text-left hover:-translate-y-1 transition-transform">
+                        <div class="text-4xl mb-4">🔋</div>
+                        <h3 class="text-xl font-bold mb-2">Steady Energy</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Fiber slows down the digestion of carbohydrates, preventing massive sugar spikes and keeping your energy perfectly balanced all day long.</p>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/50 text-left hover:-translate-y-1 transition-transform">
+                        <div class="text-4xl mb-4">🦠</div>
+                        <h3 class="text-xl font-bold mb-2">Happy Gut Microbiome</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Prebiotic fiber (found in foods like onions, oats, and apples) acts as food for the good bacteria in your gut, improving overall digestion and immunity.</p>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/50 text-left hover:-translate-y-1 transition-transform">
+                        <div class="text-4xl mb-4">❤️</div>
+                        <h3 class="text-xl font-bold mb-2">Heart Health</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Soluble fiber (found heavily in beans and lentils) binds to cholesterol particles in your digestive system and drags them out of your body!</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
 </main>
 
 <script>
-    // --- High-Fiber Recipe Database Catalog ---
+    // --- High-Fiber Recipe Database Catalog (Updated to exact paths & recipes!) ---
     const recipeDatabase = [
         {
             id: "chia-pudding",
@@ -101,71 +139,71 @@ title: Home
             description: "A creamy, high-fiber breakfast that tastes almost like dessert. Chia seeds create a thick pudding with massive fiber.",
             category: "breakfast",
             categoryDisplay: "Breakfast",
-            fiberAmount: "11g Fiber",
+            fiberAmount: "5.5g Fiber",
             image: "https://images.unsplash.com/photo-1551529834-525807d6b4f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
             link: "/recipes/breakfast/peanut-butter-banana-chia-pudding/",
-            emoji: "🥣🥜",
-            keywords: ["chia", "banana", "peanut butter", "honey", "pudding", "sweet", "milk"]
+            emoji: "🥣🍌",
+            keywords: ["chia", "banana", "peanut butter", "honey", "pudding", "sweet", "milk", "vegan", "quick"]
         },
         {
-            id: "berry-oatmeal",
-            title: "Berry Chia Oatmeal Bowl",
-            description: "A warm, comforting bowl of steel-cut rolled oats packed with chia seeds, flax, and wild summer raspberries.",
+            id: "baked-oatmeal",
+            title: "Berry-Loaded Baked Oatmeal",
+            description: "A warm, comforting breakfast bake made with everyday oats and packed with fiber-rich berries.",
             category: "breakfast",
             categoryDisplay: "Breakfast",
-            fiberAmount: "10g Fiber",
+            fiberAmount: "7g Fiber",
             image: "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-            link: "/recipes/breakfast/berry-chia-oatmeal-bowl/",
-            emoji: "🥣🍓",
-            keywords: ["oats", "oatmeal", "chia", "berry", "raspberries", "warm", "breakfast"]
+            link: "/recipes/breakfast/berry-loaded-baked-oatmeal/",
+            emoji: "🍓🥧",
+            keywords: ["oats", "oatmeal", "berry", "raspberries", "warm", "breakfast", "meal prep"]
         },
         {
             id: "lentil-stew",
-            title: "Hearty Roots Lentil Stew",
-            description: "A rich, savory one-pot meal filled with hearty brown lentils, garden carrots, celery, and fresh thyme herbs.",
+            title: "Hearty Vegetable & Lentil Stew",
+            description: "A warm, comforting stew that uses everyday lentils and vegetables. One of the absolute best sources of dietary fiber!",
             category: "lunch-dinner",
             categoryDisplay: "Lunches & Dinners",
-            fiberAmount: "15g Fiber",
+            fiberAmount: "17g Fiber",
             image: "https://images.unsplash.com/photo-1548943487-a2e4f43b4850?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-            link: "#",
+            link: "/recipes/lunch-and-dinner/hearty-vegetable-and-lentil-stew/",
             emoji: "🍲🥕",
-            keywords: ["lentil", "lentils", "stew", "soup", "carrot", "savory", "dinner", "lunch"]
+            keywords: ["lentil", "lentils", "stew", "soup", "carrot", "savory", "dinner", "lunch", "vegan", "protein"]
         },
         {
-            id: "black-bean-salad",
-            title: "Zesty Black Bean & Corn Salad",
-            description: "A quick, no-cook cooling salad mixed with high-fiber black beans, sweet corn, red onion, and a lime dressing.",
+            id: "stuffed-peppers",
+            title: "Quinoa & Black Bean Stuffed Peppers",
+            description: "Mild bell peppers stuffed with a protein-packed mixture of quinoa, black beans, and sweet corn, then baked.",
             category: "lunch-dinner",
             categoryDisplay: "Lunches & Dinners",
             fiberAmount: "12g Fiber",
             image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-            link: "#",
-            emoji: "🥗🌽",
-            keywords: ["bean", "black bean", "salad", "corn", "lime", "fresh", "lunch", "dinner", "cold"]
+            link: "/recipes/lunch-and-dinner/quinoa-and-black-bean-stuffed-peppers/",
+            emoji: "🫑🫘",
+            keywords: ["bean", "black bean", "quinoa", "peppers", "baked", "dinner", "protein", "vegetarian"]
         },
         {
-            id: "sweet-potato-brownies",
-            title: "Sweet Potato Fudge Brownies",
-            description: "Fudgy, decandent brownies sweetened naturally with baked sweet potatoes and mineral-rich cocoa powder.",
+            id: "bean-brownies",
+            title: "Fudgy Black Bean Brownies",
+            description: "A rich, chocolatey dessert. You blend black beans directly into the batter—they replace the flour entirely!",
+            category: "sweets-snacks",
+            categoryDisplay: "Sweets & Snacks",
+            fiberAmount: "4g Fiber",
+            image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+            link: "/recipes/snacks-and-sweets/fudgy-black-bean-brownies/",
+            emoji: "🍫🍰",
+            keywords: ["brownies", "chocolate", "bean", "black bean", "fudge", "sweet", "snack", "dessert", "gluten free"]
+        },
+        {
+            id: "roasted-chickpeas",
+            title: "Crunchy Spiced Roasted Chickpeas",
+            description: "A savory snack that makes a perfect healthy alternative to potato chips, perfectly roasted with simple spices.",
             category: "sweets-snacks",
             categoryDisplay: "Sweets & Snacks",
             fiberAmount: "8g Fiber",
-            image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-            link: "#",
-            emoji: "🍰🍫",
-            keywords: ["brownies", "chocolate", "sweet potato", "fudge", "sweet", "snack", "dessert"]
-        },
-        {
-            id: "chickpea-crunch",
-            title: "Spiced Roasted Chickpea Crunch",
-            description: "Oven-roasted chickpeas tossed in olive oil, garlic powder, and smoked paprika for a perfect crunchy snack.",
-            category: "sweets-snacks",
-            categoryDisplay: "Sweets & Snacks",
-            fiberAmount: "9g Fiber",
             image: "https://images.unsplash.com/photo-1613946069412-38f7f1ff0b65?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-            link: "#",
+            link: "/recipes/snacks-and-sweets/crunchy-spiced-roasted-chickpeas/",
             emoji: "🍿🌶️",
-            keywords: ["chickpea", "roasted", "crunchy", "paprika", "snack", "salty"]
+            keywords: ["chickpea", "roasted", "crunchy", "snack", "salty", "vegan", "protein"]
         }
     ];
 
@@ -176,21 +214,23 @@ title: Home
     function renderRecipes() {
         const grid = document.getElementById('recipe-grid');
         grid.innerHTML = recipeDatabase.map(recipe => `
-            <a href="${recipe.link}" class="recipe-card group flex flex-col bg-white dark:bg-slate-800 rounded-3xl shadow-md hover:shadow-xl hover:-translate-y-2 border border-slate-200 dark:border-slate-700 overflow-hidden">
-                <div class="h-48 w-full overflow-hidden relative border-b border-slate-200 dark:border-slate-700">
+            <a href="${recipe.link}" class="recipe-card group flex flex-col bg-white dark:bg-slate-900 rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-2 border border-slate-200 dark:border-slate-800 overflow-hidden transition-all duration-300">
+                <div class="h-56 w-full overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
+                    <!-- Subtle overlay gradient to make it look premium -->
+                    <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
                     <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
                 </div>
                 <div class="p-6 flex-grow flex flex-col justify-between">
                     <div>
                         <div class="flex gap-2 mb-4">
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold px-3 py-1 rounded-full border border-slate-300 dark:border-slate-600">${recipe.categoryDisplay}</span>
-                            <span class="bg-emerald-200 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-300 text-xs font-bold px-3 py-1 rounded-full border border-emerald-300 dark:border-emerald-800">${recipe.fiberAmount}</span>
+                            <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold px-3 py-1 rounded-full">${recipe.categoryDisplay}</span>
+                            <span class="bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 text-xs font-bold px-3 py-1 rounded-full">${recipe.fiberAmount}</span>
                         </div>
-                        <h3 class="text-2xl font-bold mb-2 text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">${recipe.title}</h3>
-                        <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-medium mb-6">${recipe.description}</p>
+                        <h3 class="text-2xl font-extrabold mb-2 text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-tight">${recipe.title}</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-medium mb-6 line-clamp-3">${recipe.description}</p>
                     </div>
-                    <span class="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform mt-auto">
-                        Go to Recipe &rarr;
+                    <span class="text-sm font-extrabold text-emerald-600 dark:text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform mt-auto border-t border-slate-100 dark:border-slate-800 pt-4">
+                        Let's Cook &rarr;
                     </span>
                 </div>
             </a>
@@ -218,19 +258,19 @@ title: Home
 
         if (matches.length === 0) {
             dropdown.innerHTML = `
-                <div class="p-4 text-slate-500 dark:text-slate-400 text-sm font-semibold">
-                    No matches found for "${escapeHtml(query)}"
+                <div class="p-6 text-center text-slate-500 dark:text-slate-400 text-sm font-semibold">
+                    No recipes found for "<span class="text-slate-800 dark:text-white">${escapeHtml(query)}</span>" 🥣
                 </div>
             `;
         } else {
             dropdown.innerHTML = matches.map(recipe => `
-                <a href="${recipe.link}" class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group">
-                    <span class="text-3xl bg-slate-50 dark:bg-slate-800 p-2.5 rounded-xl block">${recipe.emoji || '🌾'}</span>
+                <a href="${recipe.link}" class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                    <span class="text-3xl bg-slate-100 dark:bg-slate-900 p-2.5 rounded-xl block group-hover:scale-110 transition-transform">${recipe.emoji || '🌾'}</span>
                     <div class="text-left flex-grow">
-                        <h4 class="font-extrabold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 text-sm transition-colors">${recipe.title}</h4>
-                        <p class="text-slate-500 dark:text-slate-400 text-xs line-clamp-1">${recipe.description}</p>
+                        <h4 class="font-extrabold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 text-base transition-colors">${recipe.title}</h4>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs line-clamp-1 mt-0.5">${recipe.description}</p>
                     </div>
-                    <span class="text-xs font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 px-3 py-1 rounded-full">${recipe.fiberAmount}</span>
+                    <span class="text-xs font-bold bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 px-3 py-1.5 rounded-full whitespace-nowrap">${recipe.fiberAmount}</span>
                 </a>
             `).join('');
         }
@@ -243,9 +283,11 @@ title: Home
     }
 
     function clearSearch() {
-        document.getElementById('recipe-search').value = "";
+        const input = document.getElementById('recipe-search');
+        input.value = "";
         activeSearchQuery = "";
         document.getElementById('search-dropdown').classList.add('hidden');
+        input.focus();
     }
 
     // --- Close Suggestion Dropdown on Click-Away ---
