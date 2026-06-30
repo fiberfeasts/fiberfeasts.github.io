@@ -1,0 +1,11 @@
+# FiberFeasts Master Settings
+name: "FiberFeasts"
+title: "FiberFeasts"
+description: "Delicious, high-fiber recipes built to keep your digestion smooth, your energy high, and your tastebuds happy."
+
+# Replace this with your actual live website link!
+# Example: "https://fiberfeasts.com" or "https://yourusername.github.io"
+url: "https://fiberfeasts.github.io/"
+
+# Leave this as just two quote marks unless your site is in a subfolder
+baseurl: ""
