@@ -8,66 +8,17 @@
     <!-- SEO: Dynamic Meta Description targeting high-fiber recipes -->
     <meta name="description" content="{{ page.description | default: site.description | default: 'Discover delicious, high-fiber recipes to boost your digestion, steady your energy, and keep your gut healthy. Wholesome eating made simple.' }}">
     
-    <!-- Performance: Preconnect to Google Fonts to eliminate render-blocking delay -->
+    <!-- Performance: Defer Google Fonts to eliminate render-blocking delay -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap"></noscript>
     
+    <!-- Performance: Defer Tailwind Script to unblock rendering -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5EWWNGKJJL"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-5EWWNGKJJL');
-    </script>
-    
-    <!-- Standard Favicon from Root Folder -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <script>
-        // Enable manual class-based dark mode toggling in Tailwind CSS
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Outfit', sans-serif; transition: background-color 0.3s, color 0.3s; }
-        
-        /* Dropdown transition */
-        .dropdown-menu {
-            opacity: 0;
-            transform: translateY(10px);
-            pointer-events: none;
-            transition: all 0.2s ease-out;
-        }
-        
-        /* Invisible hover bridge */
-        .dropdown-menu::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background: transparent;
-        }
-        
-        .dropdown-container:hover .dropdown-menu,
-        .dropdown-container:focus-within .dropdown-menu {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-    </style>
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased flex flex-col min-h-screen selection:bg-emerald-200 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
 
