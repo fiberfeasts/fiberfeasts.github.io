@@ -212,10 +212,10 @@ layout: default
                     
                     <!-- Buttons are now stacked block elements so they never overlap the side -->
                     <div class="flex flex-col gap-2 w-full no-print">
-                        <button onclick="copyShoppingList()" class="w-full flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold px-4 py-3 rounded-xl transition-all dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
+                        <button onclick="copyShoppingList()" aria-label="Copy Shopping List" class="w-full flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold px-4 py-3 rounded-xl transition-all dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
                             📋 <span id="copy-text">Copy List</span>
                         </button>
-                        <button onclick="resetIngredients()" class="w-full flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-500 text-sm font-semibold px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-800/50 dark:text-slate-400 dark:border-slate-700 dark:hover:bg-slate-700 dark:hover:text-slate-300 transition-all">
+                        <button onclick="resetIngredients()" aria-label="Reset Ingredients Checklist" class="w-full flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-500 text-sm font-semibold px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-800/50 dark:text-slate-400 dark:border-slate-700 dark:hover:bg-slate-700 dark:hover:text-slate-300 transition-all">
                             Reset Checks
                         </button>
                     </div>
@@ -241,7 +241,7 @@ layout: default
         <section class="md:col-span-2">
             <div class="flex items-center justify-between mb-8 border-b-2 border-slate-100 dark:border-slate-800 pb-4 no-print">
                 <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Let's Get Cooking!</h2>
-                <button onclick="resetInstructions()" class="text-sm font-bold text-slate-400 hover:text-emerald-600 transition-colors">Reset Checklist</button>
+                <button onclick="resetInstructions()" aria-label="Reset Instructions Checklist" class="text-sm font-bold text-slate-400 hover:text-emerald-600 transition-colors">Reset Checklist</button>
             </div>
             
             <div class="space-y-8 print-instructions-container">
@@ -268,8 +268,8 @@ layout: default
                             </div>
                         </div>
                         <div class="flex gap-2">
-                            <button onclick="toggleTimer()" id="timer-ctrl" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full text-sm transition-colors shadow">Start</button>
-                            <button onclick="resetTimer()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2 px-4 rounded-full text-sm transition-colors dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600">Reset</button>
+                            <button onclick="toggleTimer()" id="timer-ctrl" aria-label="Start Step Timer" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full text-sm transition-colors shadow">Start</button>
+                            <button onclick="resetTimer()" aria-label="Reset Step Timer" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2 px-4 rounded-full text-sm transition-colors dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600">Reset</button>
                         </div>
                     </div>
                     {% endif %}
@@ -331,7 +331,8 @@ layout: default
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <!-- Nutrition Panel -->
             <div class="bg-white border-2 border-slate-950 p-6 shadow-md dark:bg-slate-900 dark:border-slate-800 dark:border-b-white">
-                <h4 class="text-2xl font-black uppercase tracking-tight border-b-8 border-slate-950 pb-2 dark:border-slate-700 dark:text-white">Nutrition Facts</h4>
+                <!-- Changed h4 to h3 for SEO Hierarchy -->
+                <h3 class="text-2xl font-black uppercase tracking-tight border-b-8 border-slate-950 pb-2 dark:border-slate-700 dark:text-white">Nutrition Facts</h3>
                 <p class="text-sm font-semibold border-b border-slate-950 py-1 dark:border-slate-700">Servings: <span id="nutrition-servings">{{ page.servings }}</span> (Values represent totals for prep quantity)</p>
                 <div class="flex justify-between items-end border-b-4 border-slate-950 py-2 dark:border-slate-700">
                     <div>
@@ -364,11 +365,12 @@ layout: default
                 <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-white/10 rounded-full blur-xl group-hover:scale-125 transition-transform"></div>
                 <div>
                     <span class="bg-white/20 border border-white/30 text-white font-bold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider">Fiber Fun Fact</span>
-                    <h4 class="text-3xl font-extrabold mt-6 mb-4 font-serif italic">Why Chia Seeds?</h4>
+                    <!-- Changed h4 to h3 for SEO Hierarchy -->
+                    <h3 class="text-3xl font-extrabold mt-6 mb-4 font-serif italic">Why Chia Seeds?</h3>
                     <p id="fun-fact-text" class="text-emerald-50 leading-relaxed font-medium transition-opacity duration-300">Chia seeds can expand to 10-12 times their weight in water! This magic gel-like absorption turns liquid into rich pudding completely naturally.</p>
                 </div>
                 <div class="mt-8">
-                    <button onclick="changeFact()" class="bg-white text-emerald-800 hover:bg-emerald-50 font-bold px-6 py-2.5 rounded-full text-sm transition-all shadow-md transform active:scale-95">Next Fun Fact &rarr;</button>
+                    <button onclick="changeFact()" aria-label="Show Next Fun Fact" class="bg-white text-emerald-800 hover:bg-emerald-50 font-bold px-6 py-2.5 rounded-full text-sm transition-all shadow-md transform active:scale-95">Next Fun Fact &rarr;</button>
                 </div>
             </div>
         </div>
@@ -397,7 +399,7 @@ layout: default
                 <h3 class="text-2xl font-extrabold mb-2">Show some love!</h3>
                 <p class="text-emerald-50 text-sm mb-4">Did you enjoy this high-fiber breakfast? Rate it below and send a virtual cheer!</p>
                 <div class="flex justify-center items-center gap-6 mt-4">
-                    <button onclick="animateLove(event)" class="relative group bg-white text-emerald-800 hover:bg-emerald-50 font-extrabold px-6 py-3 rounded-full shadow-md flex items-center gap-2 transform active:scale-95 transition-all">
+                    <button onclick="animateLove(event)" aria-label="Send Heart" class="relative group bg-white text-emerald-800 hover:bg-emerald-50 font-extrabold px-6 py-3 rounded-full shadow-md flex items-center gap-2 transform active:scale-95 transition-all">
                         <span>❤️ Send Heart</span>
                         <span id="love-counter" class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full text-xs">42</span>
                     </button>
@@ -406,7 +408,7 @@ layout: default
         </div>
 
         <div class="text-center">
-            <button onclick="window.print()" class="bg-slate-900 text-white hover:bg-emerald-600 font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2 dark:bg-white dark:text-slate-900 dark:hover:bg-emerald-400">
+            <button onclick="window.print()" aria-label="Print Recipe Card" class="bg-slate-900 text-white hover:bg-emerald-600 font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2 dark:bg-white dark:text-slate-900 dark:hover:bg-emerald-400">
                 🖨️ Print Printer-Friendly Recipe Card
             </button>
         </div>
