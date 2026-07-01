@@ -1,0 +1,5 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Note: In the future, if you ever want to move the big <style> tags out of your layout files to clean them up, you can paste all of that custom CSS right here! */
