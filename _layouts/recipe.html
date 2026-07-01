@@ -12,20 +12,9 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap"></noscript>
     
-    <!-- CSS Engine: Tailwind Script -->
-    <link rel="stylesheet" href="/assets/css/output.css">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Compiled Tailwind CSS (Jekyll Safe Path) -->
+    <link rel="stylesheet" href="{{ '/assets/css/output.css' | relative_url }}">
+
     <style>
         body { font-family: 'Outfit', sans-serif; transition: background-color 0.3s, color 0.3s; }
         
