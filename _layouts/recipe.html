@@ -11,10 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
-    <!-- Performance: Inlined CSS (Completely eliminates render-blocking CSS requests!) -->
-    <style>
-        {% include output.css %}
-    </style>
+    <!-- Performance: Preload CSS for maximum network priority -->
+    <link rel="preload" href="{{ '/assets/css/output.css' | relative_url }}" as="style">
+    <!-- Compiled Tailwind CSS (Jekyll Safe Path) -->
+    <link rel="stylesheet" href="{{ '/assets/css/output.css' | relative_url }}">
 
     <!-- Google tag (gtag.js) -->
     <script src="https://www.googletagmanager.com/gtag/js?id=G-5EWWNGKJJL"></script>
