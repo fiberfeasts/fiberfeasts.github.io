@@ -1,5 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Note: In the future, if you ever want to move the big <style> tags out of your layout files to clean them up, you can paste all of that custom CSS right here! */
+/* 1. Tell Tailwind to scan your main folder and all sub-folders for HTML */
+@source "../../";
+
+/* 2. Set your custom Outfit font */
+@theme {
+  --font-sans: "Outfit", sans-serif;
+}
+
+/* 3. Keep your manual Dark Mode toggle button working */
+@custom-variant dark (&:is(.dark *));
