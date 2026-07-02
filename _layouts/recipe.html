@@ -6,19 +6,18 @@
     <title>{{ page.title }} | FiberFeasts</title>
     <meta name="description" content="{{ page.description | default: site.description }}">
     
+    <!-- Performance: Standard Preconnect for Google Fonts (Fixes Forced Reflow) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" media="print" onload="this.media='all'">
-    <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap">
-    </noscript>
-    
-    <link rel="preload" href="{{ '/assets/css/output.css' | relative_url }}" as="style">
-    <link rel="stylesheet" href="{{ '/assets/css/output.css' | relative_url }}">
+    <!-- Performance: Inlined CSS (Completely eliminates render-blocking CSS requests!) -->
+    <style>
+        {% include output.css %}
+    </style>
 
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-5EWWNGKJJL"></script>
+    <!-- Google tag (gtag.js) -->
+    <script src="https://www.googletagmanager.com/gtag/js?id=G-5EWWNGKJJL"></script>
 
     <style>
         body { font-family: 'Outfit', sans-serif; }
@@ -70,12 +69,15 @@
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased flex flex-col min-h-screen selection:bg-emerald-200 dark:bg-slate-950 dark:text-slate-100">
 
+    <!-- Progress Indicator Bar -->
     <div class="fixed top-0 left-0 w-full h-1.5 bg-slate-200 z-50 no-print dark:bg-slate-800">
         <div id="cooking-progress" class="h-full bg-emerald-500 w-0 transition-all duration-300"></div>
     </div>
 
+    <!-- Inject Global Navbar -->
     {% include navbar.html %}
 
+    <!-- Recipe Header -->
     <header class="w-full pt-36 pb-12 text-center px-4 bg-white border-b border-slate-200 dark:bg-slate-900 dark:border-slate-800">
         <div class="max-w-4xl mx-auto">
             <div class="flex justify-center gap-2 mb-6 no-print">
@@ -90,14 +92,17 @@
                 {{ page.description }}
             </p>
 
+            <!-- Ultra-compact inline nutrition line that ONLY displays on paper -->
             <p class="hidden print:block text-xs font-bold text-emerald-700 mt-2">
                 🌾 Nutrition per Serving: {{ page.nutrition.calories }} Calories | {{ page.nutrition.fat }}g Fat | {{ page.nutrition.carbs }}g Carbs | {{ page.nutrition.fiber }}g Dietary Fiber | {{ page.nutrition.protein }}g Protein
             </p>
         </div>
     </header>
 
+    <!-- Main Content -->
     <main class="flex-grow w-full max-w-5xl mx-auto px-4 py-12">
         
+        <!-- Feature Banner Placement & Dynamic Info (Hidden in Print) -->
         <div class="bg-white rounded-3xl shadow-md border border-slate-200 overflow-hidden mb-12 dark:bg-slate-900 dark:border-slate-800 no-print">
             <div class="h-64 md:h-[450px] w-full overflow-hidden relative bg-gradient-to-br from-emerald-100 to-teal-50 dark:from-slate-900 dark:to-slate-800 flex flex-col justify-center items-center p-8 text-center border-b border-slate-200 dark:border-slate-800">
                 <span class="text-7xl mb-4 transform hover:scale-110 transition-transform cursor-default">🍳✨</span>
@@ -105,6 +110,7 @@
                 <p class="text-slate-500 text-sm mt-1 max-w-md">No photos yet! We prioritize testing wholesome ingredients to make your healthy eating journey perfect.</p>
             </div>
             
+            <!-- Dynamic Meta Info Row with Scaler Button -->
             <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200 bg-slate-50 border-t border-slate-200 dark:bg-slate-900/50 dark:divide-slate-800 dark:border-slate-800">
                 <div class="p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
@@ -139,6 +145,7 @@
 
         <div class="max-w-3xl mx-auto flex flex-col gap-12 print-layout-grid">
             
+            <!-- Section 1: Interactive Checklist Ingredients -->
             <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-slate-200 dark:bg-slate-900 dark:border-slate-800 print-ingredients-card">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4 mb-6 dark:border-slate-800">
                     <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Ingredients</h2>
@@ -166,6 +173,7 @@
                 </ul>
             </div>
 
+            <!-- Section 2: Instructions -->
             <div class="print-instructions-container">
                 <div class="flex items-center justify-between mb-8 no-print">
                     <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Instructions</h2>
@@ -185,6 +193,7 @@
                         </div>
                         
                         {% if step.timer %}
+                        <!-- Interactive Kitchen Timer Widget -->
                         <div class="timer-widget ml-18 p-6 bg-slate-50 border border-slate-200 rounded-2xl max-w-sm flex items-center justify-between shadow-inner dark:bg-slate-800/50 dark:border-slate-800 no-print">
                             <div class="flex items-center gap-4">
                                 <span class="text-3xl">⏱️</span>
@@ -205,6 +214,7 @@
             </div>
 
             {% if page.pro_tips %}
+            <!-- Bento Block: Pro Kitchen Tips -->
             <div class="bg-emerald-50/55 p-8 rounded-3xl border border-emerald-100 dark:bg-slate-900/60 dark:border-slate-800 no-print">
                 <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
                     💡 Kitchen Pro-Tips & Customization
@@ -220,8 +230,10 @@
             </div>
             {% endif %}
 
+            <!-- Two Column Section: Dynamic Nutrition Facts & Fun Facts -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
+                <!-- Modern Visual Nutrition Label -->
                 <div class="bg-white border-2 border-slate-950 p-6 shadow-md dark:bg-slate-900 dark:border-slate-800 dark:border-b-white">
                     <h3 class="text-2xl font-black uppercase tracking-tight border-b-8 border-slate-950 pb-2 dark:border-slate-700 dark:text-white">Nutrition Facts</h3>
                     <p class="text-sm font-semibold border-b border-slate-950 py-1 dark:border-slate-700">Servings: <span id="nutrition-servings">{{ page.servings }}</span> (Values represent totals for prep quantity)</p>
@@ -240,6 +252,7 @@
                         <p>Carbohydrates</p>
                         <p><span id="nutrition-carbs">{{ page.nutrition.carbs }}</span>g</p>
                     </div>
+                    <!-- Highlight Fiber in emerald as the hero nutrient! -->
                     <div class="border-b-4 border-slate-950 py-2 flex justify-between font-black text-emerald-600 dark:text-emerald-400 dark:border-slate-700">
                         <p class="flex items-center gap-1">🌾 Dietary Fiber</p>
                         <p><span id="nutrition-fiber">{{ page.nutrition.fiber }}</span>g</p>
@@ -251,6 +264,7 @@
                 </div>
 
                 {% if page.fiber_fact %}
+                <!-- Dynamic Fiber Fun Fact -->
                 <div class="bg-gradient-to-br from-emerald-600 to-teal-500 rounded-3xl p-8 text-white flex flex-col justify-between shadow-lg relative overflow-hidden group border border-emerald-500 no-print">
                     <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-white/10 rounded-full blur-xl group-hover:scale-125 transition-transform"></div>
                     <div class="relative z-10">
@@ -264,6 +278,7 @@
             </div>
 
             {% if page.faqs %}
+            <!-- Section 3: Collapsible FAQs Accordion -->
             <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 dark:bg-slate-900 dark:border-slate-800 no-print">
                 <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-6">Frequently Asked Questions</h3>
                 <div class="space-y-4">
@@ -280,6 +295,7 @@
             </div>
             {% endif %}
 
+            <!-- Section 4: Interactive Recipe Rating -->
             <div class="relative bg-gradient-to-r from-teal-500 to-emerald-600 text-white p-8 rounded-3xl text-center shadow-lg no-print overflow-hidden">
                 <div class="relative z-10">
                     <h3 class="text-2xl font-extrabold mb-2">Show some love!</h3>
@@ -293,6 +309,7 @@
                 </div>
             </div>
 
+            <!-- Print Actions Section -->
             <div class="text-center no-print mt-4">
                 <button onclick="window.print()" class="bg-slate-900 text-white hover:bg-emerald-600 font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2 dark:bg-white dark:text-slate-900 dark:hover:bg-emerald-400">
                     🖨️ Print Printer-Friendly Recipe Card
@@ -302,6 +319,7 @@
         </div>
     </main>
 
+    <!-- Custom Pop-up Modal (Avoids ugly alerts) -->
     <div id="custom-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 no-print">
         <div class="bg-white dark:bg-slate-900 max-w-md w-full rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-2xl relative">
             <h4 id="modal-title" class="text-2xl font-extrabold text-slate-900 dark:text-white mb-4"></h4>
@@ -310,6 +328,7 @@
         </div>
     </div>
 
+    <!-- Clean Footer -->
     <footer class="mt-auto w-full py-12 text-center bg-slate-900 text-slate-300 border-t border-slate-800 no-print">
         <div class="max-w-4xl mx-auto px-4">
             <p class="text-white font-extrabold text-xl mb-4">🌾 FiberFeasts</p>
@@ -322,6 +341,7 @@
         </div>
     </footer>
 
+    <!-- Interactive Logic Scripts -->
     <script>
         // --- 1. Portion Scaler Configuration ---
         const DEFAULT_SERVINGS = {{ page.servings | default: 2 }};
