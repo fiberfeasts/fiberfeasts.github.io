@@ -5,37 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} | FiberFeasts</title>
     
-    <!-- SEO: Dynamic Meta Description targeting high-fiber recipes -->
     <meta name="description" content="{% if page.description %}{{ page.description }}{% elsif site.description %}{{ site.description }}{% else %}Discover delicious, high-fiber recipes to boost your digestion, steady your energy, and keep your gut healthy. Wholesome eating made simple.{% endif %}">
     
-    <!-- Performance: Preconnect for Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Performance: Non-blocking async font loading trick -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" media="print" onload="this.media='all'">
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap">
     </noscript>
     
-    <!-- Preload CSS for maximum network priority -->
     <link rel="preload" href="{{ '/assets/css/output.css' | relative_url }}" as="style">
-    <!-- Compiled Tailwind CSS (Jekyll Safe Path) -->
     <link rel="stylesheet" href="{{ '/assets/css/output.css' | relative_url }}">
 
-    <!-- Google tag (gtag.js) - Deferred to prevent forced reflows and render blocking -->
-    <script src="https://www.googletagmanager.com/gtag/js?id=G-5EWWNGKJJL"></script>
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-5EWWNGKJJL"></script>
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased flex flex-col min-h-screen selection:bg-emerald-200 dark:bg-slate-950 dark:text-slate-100">
 
-    <!-- Dynamically Inject the Common Navbar Include -->
     {% include navbar.html %}
 
-    <!-- Inject Individual Page Content -->
     {{ content }}
 
-    <!-- Custom Pop-up Modal (Avoids ugly alerts, shared globally) -->
     <div id="custom-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white dark:bg-slate-900 max-w-md w-full rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-2xl relative">
             <h4 id="modal-title" class="text-2xl font-extrabold text-slate-900 dark:text-white mb-4"></h4>
@@ -44,7 +35,6 @@
         </div>
     </div>
 
-    <!-- Clean Shared Footer (Updated for High Contrast Accessibility) -->
     <footer class="mt-auto w-full py-12 text-center bg-slate-900 text-slate-300 border-t border-slate-800 no-print">
         <div class="max-w-4xl mx-auto px-4">
             <p class="text-white font-extrabold text-xl mb-4">🌾 FiberFeasts</p>
@@ -57,7 +47,6 @@
         </div>
     </footer>
 
-    <!-- Interactive Scripts for Mobile Drawer, Modals, and Dark Mode Support -->
     <script>
         // --- Mobile navigation drawer controllers ---
         const menuBtn = document.getElementById('mobile-menu-btn');
