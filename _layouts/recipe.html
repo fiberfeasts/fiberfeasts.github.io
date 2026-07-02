@@ -194,7 +194,7 @@
                         
                         {% if step.timer %}
                         <!-- Interactive Kitchen Timer Widget -->
-                        <div class="timer-widget ml-18 p-6 bg-slate-50 border border-slate-200 rounded-2xl max-w-sm flex items-center justify-between shadow-inner dark:bg-slate-800/50 dark:border-slate-800 no-print">
+                        <div class="timer-widget ml-16 p-6 bg-slate-50 border border-slate-200 rounded-2xl max-w-sm flex items-center justify-between shadow-inner dark:bg-slate-800/50 dark:border-slate-800 no-print">
                             <div class="flex items-center gap-4">
                                 <span class="text-3xl">⏱️</span>
                                 <div>
@@ -283,7 +283,7 @@
                 <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-6">Frequently Asked Questions</h3>
                 <div class="space-y-4">
                     {% for faq in page.faqs %}
-                    <div class="faq-item border-b border-slate-150 pb-4 dark:border-slate-800 cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="faq-item border-b border-slate-200 pb-4 dark:border-slate-800 cursor-pointer" onclick="toggleFaq(this)">
                         <div class="flex justify-between items-center">
                             <span class="font-bold text-slate-800 dark:text-slate-200">{{ faq.question }}</span>
                             <span class="faq-chevron transform transition-transform duration-200 text-slate-400">▼</span>
