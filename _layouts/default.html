@@ -8,17 +8,23 @@
     <!-- SEO: Dynamic Meta Description targeting high-fiber recipes -->
     <meta name="description" content="{% if page.description %}{{ page.description }}{% elsif site.description %}{{ site.description }}{% else %}Discover delicious, high-fiber recipes to boost your digestion, steady your energy, and keep your gut healthy. Wholesome eating made simple.{% endif %}">
     
-    <!-- Performance: Standard Preconnect for Google Fonts -->
+    <!-- Performance: Preconnect for Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Performance: Non-blocking async font loading trick -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap">
+    </noscript>
     
     <!-- Preload CSS for maximum network priority -->
     <link rel="preload" href="{{ '/assets/css/output.css' | relative_url }}" as="style">
     <!-- Compiled Tailwind CSS (Jekyll Safe Path) -->
     <link rel="stylesheet" href="{{ '/assets/css/output.css' | relative_url }}">
 
-    <!-- Google tag (gtag.js) - Deferred to prevent forced reflows during initial paint -->
+    <!-- Google tag (gtag.js) - Deferred to prevent forced reflows and render blocking -->
     <script src="https://www.googletagmanager.com/gtag/js?id=G-5EWWNGKJJL"></script>
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased flex flex-col min-h-screen selection:bg-emerald-200 dark:bg-slate-950 dark:text-slate-100">
@@ -38,11 +44,11 @@
         </div>
     </div>
 
-    <!-- Clean Shared Footer -->
-    <footer class="mt-auto w-full py-12 text-center bg-slate-900 text-slate-400 border-t border-slate-800 no-print">
+    <!-- Clean Shared Footer (Updated for High Contrast Accessibility) -->
+    <footer class="mt-auto w-full py-12 text-center bg-slate-900 text-slate-300 border-t border-slate-800 no-print">
         <div class="max-w-4xl mx-auto px-4">
             <p class="text-white font-extrabold text-xl mb-4">🌾 FiberFeasts</p>
-            <p class="text-slate-500 text-sm mb-6 font-medium">&copy; 2026. Eat well, live well.</p>
+            <p class="text-slate-400 text-sm mb-6 font-medium">&copy; 2026. Eat well, live well.</p>
             <div class="flex justify-center space-x-6 text-sm font-bold">
                 <a href="/" class="text-slate-300 hover:text-emerald-400 transition-colors">Home</a>
                 <a href="/contact/" class="text-slate-300 hover:text-emerald-400 transition-colors">Contact</a>
